@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.01532",
-   "Default View_TopLeft":"1073,-205",
+   "Default View_ScaleFactor":"0.384734",
+   "Default View_TopLeft":"307,-239",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0
 #  -string -flagsOSRD
@@ -26,32 +26,32 @@ preplace inst axi_apb_bridge_0 -pg 1 -lvl 6 -x 2050 -y -120 -defaultsOSRD
 preplace inst xlconstant_0 -pg 1 -lvl 1 -x 130 -y 130 -defaultsOSRD
 preplace inst xlconstant_1 -pg 1 -lvl 5 -x 1670 -y 1340 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 2 -x 420 -y 370 -defaultsOSRD
-preplace netloc clk_100MHz_1 1 0 6 N -220 240 10 630 -50 920 130 1520 30 1910
-preplace netloc proc_sys_reset_0_mb_reset 1 2 3 600 -40 910 120 1460
-preplace netloc xlconstant_0_dout 1 1 1 230 130n
-preplace netloc reset_n_1 1 0 2 NJ -170 230
-preplace netloc mdm_riscv_0_Debug_SYS_Rst 1 1 3 250 -60 NJ -60 880
-preplace netloc axi_timer_0_pwm0 1 6 1 N 450
-preplace netloc xlconstant_1_dout 1 5 1 1920 410n
-preplace netloc xlconcat_0_dout 1 2 1 640 90n
-preplace netloc axi_uartlite_0_interrupt 1 1 6 250 550 NJ 550 NJ 550 NJ 550 NJ 550 2190
 preplace netloc axi_timer_0_interrupt 1 1 6 230 560 NJ 560 NJ 560 NJ 560 NJ 560 2180
+preplace netloc axi_timer_0_pwm0 1 6 1 N 450
+preplace netloc axi_uartlite_0_interrupt 1 1 6 250 550 NJ 550 NJ 550 NJ 550 NJ 550 2190
+preplace netloc clk_100MHz_1 1 0 6 N -220 240 10 630 -50 920 130 1520 30 1910
+preplace netloc mdm_riscv_0_Debug_SYS_Rst 1 1 3 250 -60 NJ -60 880
+preplace netloc proc_sys_reset_0_mb_reset 1 2 3 600 -40 910 120 1460
 preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 4 620 -30 890J 140 1530 90 1860
 preplace netloc proc_sys_reset_0_peripheral_aresetn1 1 2 4 590 -130 NJ -130 NJ -130 1920J
+preplace netloc reset_n_1 1 0 2 NJ -170 230
+preplace netloc xlconcat_0_dout 1 2 1 640 90n
+preplace netloc xlconstant_0_dout 1 1 1 230 130n
+preplace netloc xlconstant_1_dout 1 5 1 1920 410n
+preplace netloc axi_apb_bridge_0_APB_M 1 6 1 N -130
+preplace netloc axi_apb_bridge_0_APB_M2 1 6 1 N -110
 preplace netloc axi_gpio_0_GPIO 1 6 1 N 130
-preplace netloc microblaze_riscv_0_M_AXI_DP 1 4 1 1450 50n
+preplace netloc axi_intc_0_interrupt 1 3 1 900 0n
 preplace netloc axi_smc_M00_AXI 1 5 1 1820 110n
 preplace netloc axi_smc_M01_AXI 1 2 4 640 -140 N -140 N -140 1810
 preplace netloc axi_smc_M02_AXI 1 5 1 1880 190n
 preplace netloc axi_smc_M03_AXI 1 5 1 1870 210n
-preplace netloc lmb_bram_if_cntlr_0_BRAM_PORT 1 5 1 1900 -50n
+preplace netloc axi_smc_M04_AXI 1 5 1 1890 -140n
 preplace netloc axi_uartlite_0_UART 1 6 1 N 260
-preplace netloc axi_apb_bridge_0_APB_M 1 6 1 N -130
-preplace netloc axi_apb_bridge_0_APB_M2 1 6 1 N -110
-preplace netloc axi_intc_0_interrupt 1 3 1 900 0n
+preplace netloc lmb_bram_if_cntlr_0_BRAM_PORT 1 5 1 1900 -50n
 preplace netloc mdm_riscv_0_MBDEBUG_0 1 3 1 930 20n
 preplace netloc microblaze_riscv_0_DLMB 1 4 1 1450 -70n
-preplace netloc axi_smc_M04_AXI 1 5 1 1890 -140n
+preplace netloc microblaze_riscv_0_M_AXI_DP 1 4 1 1450 50n
 levelinfo -pg 1 -930 130 420 760 1190 1670 2050 2210
 pagesize -pg 1 -db -bbox -sgen -1060 -960 2810 1470
 "

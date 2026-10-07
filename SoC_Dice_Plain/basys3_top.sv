@@ -148,32 +148,32 @@ module basys3_top(
   );
 
   
-//  soc_top soc_top_i (
-//        .apb_0_paddr  (apb_0_paddr  ),
-//        .apb_0_penable(apb_0_penable),
-//        .apb_0_prdata (apb_0_prdata ),
-//        .apb_0_pready (apb_0_pready ),
-//        .apb_0_psel   (apb_0_psel   ),
-//        .apb_0_pslverr(apb_0_pslverr),
-//        .apb_0_pwdata (apb_0_pwdata ),
-//        .apb_0_pwrite (apb_0_pwrite ),
-//        .apb_1_paddr  (apb_1_paddr  ),
-//        .apb_1_penable(apb_1_penable),
-//        .apb_1_prdata (apb_1_prdata ),
-//        .apb_1_pready (apb_1_pready ),
-//        .apb_1_psel   (apb_1_psel   ),
-//        .apb_1_pslverr(apb_1_pslverr),
-//        .apb_1_pwdata (apb_1_pwdata ),
-//        .apb_1_pwrite (apb_1_pwrite ),
-//        .clk_100MHz   (clk),
-//        .gpio_0_tri_i (32'haaaa_aaaa),
-//        .gpio_0_tri_o (),
-//        .gpio_0_tri_t (),
-//        .pwm          (pwm),
-//        .reset_n      (rst_n),
-//        .uart_rxd     (RsRx),
-//        .uart_txd     (RsTx)
-//  );  
+  soc_top soc_top_i (
+        .apb_0_paddr  (apb_0_paddr  ),
+        .apb_0_penable(apb_0_penable),
+        .apb_0_prdata (apb_0_prdata ),
+        .apb_0_pready (apb_0_pready ),
+        .apb_0_psel   (apb_0_psel   ),
+        .apb_0_pslverr(apb_0_pslverr),
+        .apb_0_pwdata (apb_0_pwdata ),
+        .apb_0_pwrite (apb_0_pwrite ),
+        .apb_1_paddr  (apb_1_paddr  ),
+        .apb_1_penable(apb_1_penable),
+        .apb_1_prdata (apb_1_prdata ),
+        .apb_1_pready (apb_1_pready ),
+        .apb_1_psel   (apb_1_psel   ),
+        .apb_1_pslverr(apb_1_pslverr),
+        .apb_1_pwdata (apb_1_pwdata ),
+        .apb_1_pwrite (apb_1_pwrite ),
+        .clk_100MHz   (clk),
+        .gpio_0_tri_i (32'haaaa_aaaa),
+        .gpio_0_tri_o (),
+        .gpio_0_tri_t (),
+        .pwm          (pwm),
+        .reset_n      (rst_n),
+        .uart_rxd     (RsRx),
+        .uart_txd     (RsTx)
+  );  
   
   
 endmodule

@@ -7,7 +7,7 @@ module ahb3lite_master_bfm #(
   input                       HRESETn,
                               HCLK,
 
-  AHB Master Interface
+//  AHB Master Interface
   output reg                    HSEL,
   output reg [HADDR_SIZE-10]   HADDR,
   output reg [HDATA_SIZE-10]   HWDATA,

@@ -61,7 +61,7 @@ module seg7_top_tb;
 
     apb.write(32'h0000_0008, 32'h0000_000f, '0, 3'b000, error);
     if (error) $fatal(1, "DIM write failed");
-    apb.write(32'h0000_0004, 32'h0000_4321, '0, 3'b000, error);
+    apb.write(32'h0000_0004, 32'h0000_1234, '0, 3'b000, error);
     if (error) $fatal(1, "VAL write failed");
     apb.write(32'h0000_0000, 32'h0000_0001, '0, 3'b000, error);
     if (error) $fatal(1, "CTL write failed");
@@ -69,7 +69,7 @@ module seg7_top_tb;
     apb.read(32'h0000_0008, read_data, 3'b000, error);
     if (error || read_data !== 32'h0000_000f) $fatal(1, "DIM read failed");
     apb.read(32'h0000_0004, read_data, 3'b000, error);
-    if (error || read_data !== 32'h0000_4321) $fatal(1, "VAL read failed");
+    if (error || read_data !== 32'h0000_1234) $fatal(1, "VAL read failed");
     apb.read(32'h0000_0000, read_data, 3'b000, error);
     if (error || read_data !== 32'h0000_0001) $fatal(1, "CTL read failed");
 

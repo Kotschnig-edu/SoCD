@@ -46,6 +46,9 @@ module seg7_top #(
   localparam logic [ADDR_W-1:0] ADDR_VAL = 4;
   localparam logic [ADDR_W-1:0] ADDR_DIM = 8;
 
+  // VAL writable bits: DP3..DP0 at 28/24/20/16, DIG3..DIG0 at 15:0
+  localparam logic [31:0] VAL_MASK = 32'h1111_FFFF;
+
   logic        ctl_enable_ff;
   logic [31:0] val_ff;
   logic  [3:0] dim_ff;
@@ -73,7 +76,7 @@ module seg7_top #(
       if (apb_write) begin
         case (paddr)
           ADDR_CTL: ctl_enable_ff <= pwdata[0];
-          ADDR_VAL: val_ff        <= pwdata;
+          ADDR_VAL: val_ff        <= pwdata & VAL_MASK;
           ADDR_DIM: dim_ff        <= pwdata[3:0];
           default: ;
         endcase
@@ -112,15 +115,15 @@ module seg7_top #(
       end
       2'd1: begin
         digit_value  = val_ff[7:4];
-        decimal_point = val_ff[17];
+        decimal_point = val_ff[20];
       end
       2'd2: begin
         digit_value  = val_ff[11:8];
-        decimal_point = val_ff[18];
+        decimal_point = val_ff[24];
       end
       default: begin
         digit_value  = val_ff[15:12];
-        decimal_point = val_ff[19];
+        decimal_point = val_ff[28];
       end
     endcase
 

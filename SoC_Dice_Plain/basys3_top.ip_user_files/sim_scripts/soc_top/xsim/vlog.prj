@@ -61,6 +61,13 @@ sv xil_defaultlib -i "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/bu
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_58/sim/bd_35fe_m04wn_0.sv" \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_59/sim/bd_35fe_m04bn_0.sv" \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_60/sim/bd_35fe_m04e_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_61/sim/bd_35fe_m05s2a_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_62/sim/bd_35fe_m05arn_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_63/sim/bd_35fe_m05rn_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_64/sim/bd_35fe_m05awn_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_65/sim/bd_35fe_m05wn_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_66/sim/bd_35fe_m05bn_0.sv" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_67/sim/bd_35fe_m05e_0.sv" \
 
 verilog xil_defaultlib -i "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
@@ -73,6 +80,7 @@ verilog xil_defaultlib -i "../../../../../../AMDDesignTools/2025.2/Vivado/data/r
 "../../../bd/soc_top/ip/soc_top_xlconstant_1_0/sim/soc_top_xlconstant_1_0.v" \
 "../../../bd/soc_top/ip/soc_top_xlconcat_0_0/sim/soc_top_xlconcat_0_0.v" \
 "../../../bd/soc_top/sim/soc_top.v" \
+"../../../bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
 
 verilog xil_defaultlib "glbl.v"
 

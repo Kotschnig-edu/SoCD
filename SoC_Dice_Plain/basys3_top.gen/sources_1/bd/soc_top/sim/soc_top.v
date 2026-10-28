@@ -2,17 +2,28 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Wed Oct  7 11:01:27 2026
-//Host        : R02738 running 64-bit major release  (build 9200)
+//Date        : Wed Oct 28 11:43:29 2026
+//Host        : R02280 running 64-bit major release  (build 9200)
 //Command     : generate_target soc_top.bd
 //Design      : soc_top
 //Purpose     : IP block netlist
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "soc_top,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=soc_top,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=14,numReposBlks=14,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=3,da_bram_cntlr_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "soc_top.hwdef" *) 
+(* CORE_GENERATION_INFO = "soc_top,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=soc_top,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=16,numReposBlks=16,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=3,da_bram_cntlr_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "soc_top.hwdef" *) 
 module soc_top
-   (apb_0_paddr,
+   (ahb_0_haddr,
+    ahb_0_hburst,
+    ahb_0_hmastlock,
+    ahb_0_hprot,
+    ahb_0_hrdata,
+    ahb_0_hready,
+    ahb_0_hresp,
+    ahb_0_hsize,
+    ahb_0_htrans,
+    ahb_0_hwdata,
+    ahb_0_hwrite,
+    apb_0_paddr,
     apb_0_penable,
     apb_0_prdata,
     apb_0_pready,
@@ -36,6 +47,17 @@ module soc_top
     reset_n,
     uart_rxd,
     uart_txd);
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HADDR" *) (* X_INTERFACE_MODE = "Master" *) output [31:0]ahb_0_haddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HBURST" *) output [2:0]ahb_0_hburst;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HMASTLOCK" *) output ahb_0_hmastlock;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HPROT" *) output [3:0]ahb_0_hprot;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HRDATA" *) input [31:0]ahb_0_hrdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HREADY" *) input ahb_0_hready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HRESP" *) input ahb_0_hresp;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HSIZE" *) output [2:0]ahb_0_hsize;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HTRANS" *) output [1:0]ahb_0_htrans;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HWDATA" *) output [31:0]ahb_0_hwdata;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:ahblite:2.0 ahb_0 HWRITE" *) output ahb_0_hwrite;
   (* X_INTERFACE_INFO = "xilinx.com:interface:apb:1.0 apb_0 PADDR" *) (* X_INTERFACE_MODE = "Master" *) output [31:0]apb_0_paddr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:apb:1.0 apb_0 PENABLE" *) output apb_0_penable;
   (* X_INTERFACE_INFO = "xilinx.com:interface:apb:1.0 apb_0 PRDATA" *) input [31:0]apb_0_prdata;
@@ -61,6 +83,17 @@ module soc_top
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart RxD" *) (* X_INTERFACE_MODE = "Master" *) input uart_rxd;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart TxD" *) output uart_txd;
 
+  wire [31:0]ahb_0_haddr;
+  wire [2:0]ahb_0_hburst;
+  wire ahb_0_hmastlock;
+  wire [3:0]ahb_0_hprot;
+  wire [31:0]ahb_0_hrdata;
+  wire ahb_0_hready;
+  wire ahb_0_hresp;
+  wire [2:0]ahb_0_hsize;
+  wire [1:0]ahb_0_htrans;
+  wire [31:0]ahb_0_hwdata;
+  wire ahb_0_hwrite;
   wire [31:0]apb_0_prdata;
   wire [0:0]apb_0_pready;
   wire [0:0]apb_0_psel;
@@ -74,6 +107,37 @@ module soc_top
   wire [31:0]apb_1_pwdata;
   wire apb_1_pwrite;
   wire axi_intc_0_interrupt_INTERRUPT;
+  wire [31:0]axi_protocol_convert_0_M_AXI_ARADDR;
+  wire [1:0]axi_protocol_convert_0_M_AXI_ARBURST;
+  wire [3:0]axi_protocol_convert_0_M_AXI_ARCACHE;
+  wire [7:0]axi_protocol_convert_0_M_AXI_ARLEN;
+  wire [0:0]axi_protocol_convert_0_M_AXI_ARLOCK;
+  wire [2:0]axi_protocol_convert_0_M_AXI_ARPROT;
+  wire axi_protocol_convert_0_M_AXI_ARREADY;
+  wire [2:0]axi_protocol_convert_0_M_AXI_ARSIZE;
+  wire axi_protocol_convert_0_M_AXI_ARVALID;
+  wire [31:0]axi_protocol_convert_0_M_AXI_AWADDR;
+  wire [1:0]axi_protocol_convert_0_M_AXI_AWBURST;
+  wire [3:0]axi_protocol_convert_0_M_AXI_AWCACHE;
+  wire [7:0]axi_protocol_convert_0_M_AXI_AWLEN;
+  wire [0:0]axi_protocol_convert_0_M_AXI_AWLOCK;
+  wire [2:0]axi_protocol_convert_0_M_AXI_AWPROT;
+  wire axi_protocol_convert_0_M_AXI_AWREADY;
+  wire [2:0]axi_protocol_convert_0_M_AXI_AWSIZE;
+  wire axi_protocol_convert_0_M_AXI_AWVALID;
+  wire axi_protocol_convert_0_M_AXI_BREADY;
+  wire [1:0]axi_protocol_convert_0_M_AXI_BRESP;
+  wire axi_protocol_convert_0_M_AXI_BVALID;
+  wire [31:0]axi_protocol_convert_0_M_AXI_RDATA;
+  wire axi_protocol_convert_0_M_AXI_RLAST;
+  wire axi_protocol_convert_0_M_AXI_RREADY;
+  wire [1:0]axi_protocol_convert_0_M_AXI_RRESP;
+  wire axi_protocol_convert_0_M_AXI_RVALID;
+  wire [31:0]axi_protocol_convert_0_M_AXI_WDATA;
+  wire axi_protocol_convert_0_M_AXI_WLAST;
+  wire axi_protocol_convert_0_M_AXI_WREADY;
+  wire [3:0]axi_protocol_convert_0_M_AXI_WSTRB;
+  wire axi_protocol_convert_0_M_AXI_WVALID;
   wire [8:0]axi_smc_M00_AXI_ARADDR;
   wire axi_smc_M00_AXI_ARREADY;
   wire axi_smc_M00_AXI_ARVALID;
@@ -158,6 +222,25 @@ module soc_top
   wire [31:0]axi_smc_M04_AXI_WDATA;
   wire axi_smc_M04_AXI_WREADY;
   wire axi_smc_M04_AXI_WVALID;
+  wire [31:0]axi_smc_M05_AXI_ARADDR;
+  wire [2:0]axi_smc_M05_AXI_ARPROT;
+  wire axi_smc_M05_AXI_ARREADY;
+  wire axi_smc_M05_AXI_ARVALID;
+  wire [31:0]axi_smc_M05_AXI_AWADDR;
+  wire [2:0]axi_smc_M05_AXI_AWPROT;
+  wire axi_smc_M05_AXI_AWREADY;
+  wire axi_smc_M05_AXI_AWVALID;
+  wire axi_smc_M05_AXI_BREADY;
+  wire [1:0]axi_smc_M05_AXI_BRESP;
+  wire axi_smc_M05_AXI_BVALID;
+  wire [31:0]axi_smc_M05_AXI_RDATA;
+  wire axi_smc_M05_AXI_RREADY;
+  wire [1:0]axi_smc_M05_AXI_RRESP;
+  wire axi_smc_M05_AXI_RVALID;
+  wire [31:0]axi_smc_M05_AXI_WDATA;
+  wire axi_smc_M05_AXI_WREADY;
+  wire [3:0]axi_smc_M05_AXI_WSTRB;
+  wire axi_smc_M05_AXI_WVALID;
   wire axi_timer_0_interrupt;
   wire axi_uartlite_0_interrupt;
   wire clk_100MHz;
@@ -227,6 +310,51 @@ module soc_top
   assign apb_0_pwdata[31:0] = apb_1_pwdata;
   assign apb_0_pwrite = apb_1_pwrite;
   assign apb_1_psel[0] = \^apb_1_psel [1];
+  soc_top_axi_ahblite_bridge_0_0 axi_ahblite_bridge_0
+       (.m_ahb_haddr(ahb_0_haddr),
+        .m_ahb_hburst(ahb_0_hburst),
+        .m_ahb_hmastlock(ahb_0_hmastlock),
+        .m_ahb_hprot(ahb_0_hprot),
+        .m_ahb_hrdata(ahb_0_hrdata),
+        .m_ahb_hready(ahb_0_hready),
+        .m_ahb_hresp(ahb_0_hresp),
+        .m_ahb_hsize(ahb_0_hsize),
+        .m_ahb_htrans(ahb_0_htrans),
+        .m_ahb_hwdata(ahb_0_hwdata),
+        .m_ahb_hwrite(ahb_0_hwrite),
+        .s_axi_aclk(clk_100MHz),
+        .s_axi_araddr(axi_protocol_convert_0_M_AXI_ARADDR),
+        .s_axi_arburst(axi_protocol_convert_0_M_AXI_ARBURST),
+        .s_axi_arcache(axi_protocol_convert_0_M_AXI_ARCACHE),
+        .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn1),
+        .s_axi_arlen(axi_protocol_convert_0_M_AXI_ARLEN),
+        .s_axi_arlock(axi_protocol_convert_0_M_AXI_ARLOCK),
+        .s_axi_arprot(axi_protocol_convert_0_M_AXI_ARPROT),
+        .s_axi_arready(axi_protocol_convert_0_M_AXI_ARREADY),
+        .s_axi_arsize(axi_protocol_convert_0_M_AXI_ARSIZE),
+        .s_axi_arvalid(axi_protocol_convert_0_M_AXI_ARVALID),
+        .s_axi_awaddr(axi_protocol_convert_0_M_AXI_AWADDR),
+        .s_axi_awburst(axi_protocol_convert_0_M_AXI_AWBURST),
+        .s_axi_awcache(axi_protocol_convert_0_M_AXI_AWCACHE),
+        .s_axi_awlen(axi_protocol_convert_0_M_AXI_AWLEN),
+        .s_axi_awlock(axi_protocol_convert_0_M_AXI_AWLOCK),
+        .s_axi_awprot(axi_protocol_convert_0_M_AXI_AWPROT),
+        .s_axi_awready(axi_protocol_convert_0_M_AXI_AWREADY),
+        .s_axi_awsize(axi_protocol_convert_0_M_AXI_AWSIZE),
+        .s_axi_awvalid(axi_protocol_convert_0_M_AXI_AWVALID),
+        .s_axi_bready(axi_protocol_convert_0_M_AXI_BREADY),
+        .s_axi_bresp(axi_protocol_convert_0_M_AXI_BRESP),
+        .s_axi_bvalid(axi_protocol_convert_0_M_AXI_BVALID),
+        .s_axi_rdata(axi_protocol_convert_0_M_AXI_RDATA),
+        .s_axi_rlast(axi_protocol_convert_0_M_AXI_RLAST),
+        .s_axi_rready(axi_protocol_convert_0_M_AXI_RREADY),
+        .s_axi_rresp(axi_protocol_convert_0_M_AXI_RRESP),
+        .s_axi_rvalid(axi_protocol_convert_0_M_AXI_RVALID),
+        .s_axi_wdata(axi_protocol_convert_0_M_AXI_WDATA),
+        .s_axi_wlast(axi_protocol_convert_0_M_AXI_WLAST),
+        .s_axi_wready(axi_protocol_convert_0_M_AXI_WREADY),
+        .s_axi_wstrb(axi_protocol_convert_0_M_AXI_WSTRB),
+        .s_axi_wvalid(axi_protocol_convert_0_M_AXI_WVALID));
   soc_top_axi_apb_bridge_0_1 axi_apb_bridge_0
        (.m_apb_paddr(apb_1_paddr),
         .m_apb_penable(apb_1_penable),
@@ -300,6 +428,59 @@ module soc_top
         .s_axi_wready(axi_smc_M01_AXI_WREADY),
         .s_axi_wstrb(axi_smc_M01_AXI_WSTRB),
         .s_axi_wvalid(axi_smc_M01_AXI_WVALID));
+  soc_top_axi_protocol_convert_0_0 axi_protocol_convert_0
+       (.aclk(clk_100MHz),
+        .aresetn(proc_sys_reset_0_peripheral_aresetn),
+        .m_axi_araddr(axi_protocol_convert_0_M_AXI_ARADDR),
+        .m_axi_arburst(axi_protocol_convert_0_M_AXI_ARBURST),
+        .m_axi_arcache(axi_protocol_convert_0_M_AXI_ARCACHE),
+        .m_axi_arlen(axi_protocol_convert_0_M_AXI_ARLEN),
+        .m_axi_arlock(axi_protocol_convert_0_M_AXI_ARLOCK),
+        .m_axi_arprot(axi_protocol_convert_0_M_AXI_ARPROT),
+        .m_axi_arready(axi_protocol_convert_0_M_AXI_ARREADY),
+        .m_axi_arsize(axi_protocol_convert_0_M_AXI_ARSIZE),
+        .m_axi_arvalid(axi_protocol_convert_0_M_AXI_ARVALID),
+        .m_axi_awaddr(axi_protocol_convert_0_M_AXI_AWADDR),
+        .m_axi_awburst(axi_protocol_convert_0_M_AXI_AWBURST),
+        .m_axi_awcache(axi_protocol_convert_0_M_AXI_AWCACHE),
+        .m_axi_awlen(axi_protocol_convert_0_M_AXI_AWLEN),
+        .m_axi_awlock(axi_protocol_convert_0_M_AXI_AWLOCK),
+        .m_axi_awprot(axi_protocol_convert_0_M_AXI_AWPROT),
+        .m_axi_awready(axi_protocol_convert_0_M_AXI_AWREADY),
+        .m_axi_awsize(axi_protocol_convert_0_M_AXI_AWSIZE),
+        .m_axi_awvalid(axi_protocol_convert_0_M_AXI_AWVALID),
+        .m_axi_bready(axi_protocol_convert_0_M_AXI_BREADY),
+        .m_axi_bresp(axi_protocol_convert_0_M_AXI_BRESP),
+        .m_axi_bvalid(axi_protocol_convert_0_M_AXI_BVALID),
+        .m_axi_rdata(axi_protocol_convert_0_M_AXI_RDATA),
+        .m_axi_rlast(axi_protocol_convert_0_M_AXI_RLAST),
+        .m_axi_rready(axi_protocol_convert_0_M_AXI_RREADY),
+        .m_axi_rresp(axi_protocol_convert_0_M_AXI_RRESP),
+        .m_axi_rvalid(axi_protocol_convert_0_M_AXI_RVALID),
+        .m_axi_wdata(axi_protocol_convert_0_M_AXI_WDATA),
+        .m_axi_wlast(axi_protocol_convert_0_M_AXI_WLAST),
+        .m_axi_wready(axi_protocol_convert_0_M_AXI_WREADY),
+        .m_axi_wstrb(axi_protocol_convert_0_M_AXI_WSTRB),
+        .m_axi_wvalid(axi_protocol_convert_0_M_AXI_WVALID),
+        .s_axi_araddr(axi_smc_M05_AXI_ARADDR),
+        .s_axi_arprot(axi_smc_M05_AXI_ARPROT),
+        .s_axi_arready(axi_smc_M05_AXI_ARREADY),
+        .s_axi_arvalid(axi_smc_M05_AXI_ARVALID),
+        .s_axi_awaddr(axi_smc_M05_AXI_AWADDR),
+        .s_axi_awprot(axi_smc_M05_AXI_AWPROT),
+        .s_axi_awready(axi_smc_M05_AXI_AWREADY),
+        .s_axi_awvalid(axi_smc_M05_AXI_AWVALID),
+        .s_axi_bready(axi_smc_M05_AXI_BREADY),
+        .s_axi_bresp(axi_smc_M05_AXI_BRESP),
+        .s_axi_bvalid(axi_smc_M05_AXI_BVALID),
+        .s_axi_rdata(axi_smc_M05_AXI_RDATA),
+        .s_axi_rready(axi_smc_M05_AXI_RREADY),
+        .s_axi_rresp(axi_smc_M05_AXI_RRESP),
+        .s_axi_rvalid(axi_smc_M05_AXI_RVALID),
+        .s_axi_wdata(axi_smc_M05_AXI_WDATA),
+        .s_axi_wready(axi_smc_M05_AXI_WREADY),
+        .s_axi_wstrb(axi_smc_M05_AXI_WSTRB),
+        .s_axi_wvalid(axi_smc_M05_AXI_WVALID));
   soc_top_axi_smc_0 axi_smc
        (.M00_AXI_araddr(axi_smc_M00_AXI_ARADDR),
         .M00_AXI_arready(axi_smc_M00_AXI_ARREADY),
@@ -385,6 +566,25 @@ module soc_top
         .M04_AXI_wdata(axi_smc_M04_AXI_WDATA),
         .M04_AXI_wready(axi_smc_M04_AXI_WREADY),
         .M04_AXI_wvalid(axi_smc_M04_AXI_WVALID),
+        .M05_AXI_araddr(axi_smc_M05_AXI_ARADDR),
+        .M05_AXI_arprot(axi_smc_M05_AXI_ARPROT),
+        .M05_AXI_arready(axi_smc_M05_AXI_ARREADY),
+        .M05_AXI_arvalid(axi_smc_M05_AXI_ARVALID),
+        .M05_AXI_awaddr(axi_smc_M05_AXI_AWADDR),
+        .M05_AXI_awprot(axi_smc_M05_AXI_AWPROT),
+        .M05_AXI_awready(axi_smc_M05_AXI_AWREADY),
+        .M05_AXI_awvalid(axi_smc_M05_AXI_AWVALID),
+        .M05_AXI_bready(axi_smc_M05_AXI_BREADY),
+        .M05_AXI_bresp(axi_smc_M05_AXI_BRESP),
+        .M05_AXI_bvalid(axi_smc_M05_AXI_BVALID),
+        .M05_AXI_rdata(axi_smc_M05_AXI_RDATA),
+        .M05_AXI_rready(axi_smc_M05_AXI_RREADY),
+        .M05_AXI_rresp(axi_smc_M05_AXI_RRESP),
+        .M05_AXI_rvalid(axi_smc_M05_AXI_RVALID),
+        .M05_AXI_wdata(axi_smc_M05_AXI_WDATA),
+        .M05_AXI_wready(axi_smc_M05_AXI_WREADY),
+        .M05_AXI_wstrb(axi_smc_M05_AXI_WSTRB),
+        .M05_AXI_wvalid(axi_smc_M05_AXI_WVALID),
         .S00_AXI_araddr(microblaze_riscv_0_M_AXI_DP_ARADDR),
         .S00_AXI_arprot(microblaze_riscv_0_M_AXI_DP_ARPROT),
         .S00_AXI_arready(microblaze_riscv_0_M_AXI_DP_ARREADY),

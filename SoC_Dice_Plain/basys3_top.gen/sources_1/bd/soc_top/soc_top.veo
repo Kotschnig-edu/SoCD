@@ -62,14 +62,6 @@ soc_top your_instance_name (
   .apb_0_pslverr(apb_0_pslverr), // input wire [0:0] apb_0_pslverr
   .apb_0_pwdata(apb_0_pwdata), // output wire [31:0] apb_0_pwdata
   .apb_0_pwrite(apb_0_pwrite), // output wire apb_0_pwrite
-  .apb_1_paddr(apb_1_paddr), // output wire [31:0] apb_1_paddr
-  .apb_1_penable(apb_1_penable), // output wire apb_1_penable
-  .apb_1_prdata(apb_1_prdata), // input wire [31:0] apb_1_prdata
-  .apb_1_pready(apb_1_pready), // input wire [0:0] apb_1_pready
-  .apb_1_psel(apb_1_psel), // output wire [0:0] apb_1_psel
-  .apb_1_pslverr(apb_1_pslverr), // input wire [0:0] apb_1_pslverr
-  .apb_1_pwdata(apb_1_pwdata), // output wire [31:0] apb_1_pwdata
-  .apb_1_pwrite(apb_1_pwrite), // output wire apb_1_pwrite
   .uart_rxd(uart_rxd), // input wire uart_rxd
   .uart_txd(uart_txd), // output wire uart_txd
   .gpio_rtl_0_tri_i(gpio_rtl_0_tri_i), // input wire [31:0] gpio_rtl_0_tri_i
@@ -77,7 +69,26 @@ soc_top your_instance_name (
   .gpio_rtl_0_tri_t(gpio_rtl_0_tri_t), // output wire [31:0] gpio_rtl_0_tri_t
   .pwm(pwm), // output wire pwm
   .clk_100MHz(clk_100MHz), // input wire clk_100MHz
-  .reset_n(reset_n) // input wire reset_n
+  .reset_n(reset_n), // input wire reset_n
+  .ahb_0_haddr(ahb_0_haddr), // output wire [31:0] ahb_0_haddr
+  .ahb_0_hburst(ahb_0_hburst), // output wire [2:0] ahb_0_hburst
+  .ahb_0_hmastlock(ahb_0_hmastlock), // output wire ahb_0_hmastlock
+  .ahb_0_hprot(ahb_0_hprot), // output wire [3:0] ahb_0_hprot
+  .ahb_0_hrdata(ahb_0_hrdata), // input wire [31:0] ahb_0_hrdata
+  .ahb_0_hready(ahb_0_hready), // input wire ahb_0_hready
+  .ahb_0_hresp(ahb_0_hresp), // input wire ahb_0_hresp
+  .ahb_0_hsize(ahb_0_hsize), // output wire [2:0] ahb_0_hsize
+  .ahb_0_htrans(ahb_0_htrans), // output wire [1:0] ahb_0_htrans
+  .ahb_0_hwdata(ahb_0_hwdata), // output wire [31:0] ahb_0_hwdata
+  .ahb_0_hwrite(ahb_0_hwrite), // output wire ahb_0_hwrite
+  .apb_1_paddr(apb_1_paddr), // output wire [31:0] apb_1_paddr
+  .apb_1_penable(apb_1_penable), // output wire apb_1_penable
+  .apb_1_prdata(apb_1_prdata), // input wire [31:0] apb_1_prdata
+  .apb_1_pready(apb_1_pready), // input wire [0:0] apb_1_pready
+  .apb_1_psel(apb_1_psel), // output wire [0:0] apb_1_psel
+  .apb_1_pslverr(apb_1_pslverr), // input wire [0:0] apb_1_pslverr
+  .apb_1_pwdata(apb_1_pwdata), // output wire [31:0] apb_1_pwdata
+  .apb_1_pwrite(apb_1_pwrite) // output wire apb_1_pwrite
 );
 // INST_TAG_END ------  End cut for INSTANTIATION Template  ------
 

@@ -70,22 +70,6 @@ module soc_top_sv (
   (* X_INTERFACE_IGNORE = "true" *)
   output wire apb_0_pwrite,
   (* X_INTERFACE_IGNORE = "true" *)
-  output wire [31:0] apb_1_paddr,
-  (* X_INTERFACE_IGNORE = "true" *)
-  output wire apb_1_penable,
-  (* X_INTERFACE_IGNORE = "true" *)
-  input wire [31:0] apb_1_prdata,
-  (* X_INTERFACE_IGNORE = "true" *)
-  input wire [0:0] apb_1_pready,
-  (* X_INTERFACE_IGNORE = "true" *)
-  output wire [0:0] apb_1_psel,
-  (* X_INTERFACE_IGNORE = "true" *)
-  input wire [0:0] apb_1_pslverr,
-  (* X_INTERFACE_IGNORE = "true" *)
-  output wire [31:0] apb_1_pwdata,
-  (* X_INTERFACE_IGNORE = "true" *)
-  output wire apb_1_pwrite,
-  (* X_INTERFACE_IGNORE = "true" *)
   input wire uart_rxd,
   (* X_INTERFACE_IGNORE = "true" *)
   output wire uart_txd,
@@ -100,7 +84,45 @@ module soc_top_sv (
   (* X_INTERFACE_IGNORE = "true" *)
   input wire clk_100MHz,
   (* X_INTERFACE_IGNORE = "true" *)
-  input wire reset_n
+  input wire reset_n,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [31:0] ahb_0_haddr,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [2:0] ahb_0_hburst,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire ahb_0_hmastlock,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [3:0] ahb_0_hprot,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [31:0] ahb_0_hrdata,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire ahb_0_hready,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire ahb_0_hresp,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [2:0] ahb_0_hsize,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [1:0] ahb_0_htrans,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [31:0] ahb_0_hwdata,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire ahb_0_hwrite,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [31:0] apb_1_paddr,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire apb_1_penable,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [31:0] apb_1_prdata,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [0:0] apb_1_pready,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [0:0] apb_1_psel,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [0:0] apb_1_pslverr,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire [31:0] apb_1_pwdata,
+  (* X_INTERFACE_IGNORE = "true" *)
+  output wire apb_1_pwrite
 );
 
   soc_top inst (
@@ -112,14 +134,6 @@ module soc_top_sv (
     .apb_0_pslverr(apb_0_pslverr),
     .apb_0_pwdata(apb_0_pwdata),
     .apb_0_pwrite(apb_0_pwrite),
-    .apb_1_paddr(apb_1_paddr),
-    .apb_1_penable(apb_1_penable),
-    .apb_1_prdata(apb_1_prdata),
-    .apb_1_pready(apb_1_pready),
-    .apb_1_psel(apb_1_psel),
-    .apb_1_pslverr(apb_1_pslverr),
-    .apb_1_pwdata(apb_1_pwdata),
-    .apb_1_pwrite(apb_1_pwrite),
     .uart_rxd(uart_rxd),
     .uart_txd(uart_txd),
     .gpio_rtl_0_tri_i(gpio_rtl_0_tri_i),
@@ -127,7 +141,26 @@ module soc_top_sv (
     .gpio_rtl_0_tri_t(gpio_rtl_0_tri_t),
     .pwm(pwm),
     .clk_100MHz(clk_100MHz),
-    .reset_n(reset_n)
+    .reset_n(reset_n),
+    .ahb_0_haddr(ahb_0_haddr),
+    .ahb_0_hburst(ahb_0_hburst),
+    .ahb_0_hmastlock(ahb_0_hmastlock),
+    .ahb_0_hprot(ahb_0_hprot),
+    .ahb_0_hrdata(ahb_0_hrdata),
+    .ahb_0_hready(ahb_0_hready),
+    .ahb_0_hresp(ahb_0_hresp),
+    .ahb_0_hsize(ahb_0_hsize),
+    .ahb_0_htrans(ahb_0_htrans),
+    .ahb_0_hwdata(ahb_0_hwdata),
+    .ahb_0_hwrite(ahb_0_hwrite),
+    .apb_1_paddr(apb_1_paddr),
+    .apb_1_penable(apb_1_penable),
+    .apb_1_prdata(apb_1_prdata),
+    .apb_1_pready(apb_1_pready),
+    .apb_1_psel(apb_1_psel),
+    .apb_1_pslverr(apb_1_pslverr),
+    .apb_1_pwdata(apb_1_pwdata),
+    .apb_1_pwrite(apb_1_pwrite)
   );
 
 endmodule

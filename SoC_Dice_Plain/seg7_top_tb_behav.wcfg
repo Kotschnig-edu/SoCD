@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="seg7_top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="seg7_top_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="317.500001 us"></ZoomEndTime>
+      <Cursor1Time time="183.525000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="26" />
+   <wvobject fp_name="/seg7_top_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/rst_n" type="logic">
+      <obj_property name="ElementShortName">rst_n</obj_property>
+      <obj_property name="ObjectShortName">rst_n</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/paddr" type="array">
+      <obj_property name="ElementShortName">paddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">paddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/penable" type="logic">
+      <obj_property name="ElementShortName">penable</obj_property>
+      <obj_property name="ObjectShortName">penable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/psel" type="logic">
+      <obj_property name="ElementShortName">psel</obj_property>
+      <obj_property name="ObjectShortName">psel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pwrite" type="logic">
+      <obj_property name="ElementShortName">pwrite</obj_property>
+      <obj_property name="ObjectShortName">pwrite</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pwdata" type="array">
+      <obj_property name="ElementShortName">pwdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pwdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pstrb" type="array">
+      <obj_property name="ElementShortName">pstrb[3:0]</obj_property>
+      <obj_property name="ObjectShortName">pstrb[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pprot" type="array">
+      <obj_property name="ElementShortName">pprot[2:0]</obj_property>
+      <obj_property name="ObjectShortName">pprot[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pready" type="logic">
+      <obj_property name="ElementShortName">pready</obj_property>
+      <obj_property name="ObjectShortName">pready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/pslverr" type="logic">
+      <obj_property name="ElementShortName">pslverr</obj_property>
+      <obj_property name="ObjectShortName">pslverr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/prdata" type="array">
+      <obj_property name="ElementShortName">prdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">prdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/seg7_seg" type="array">
+      <obj_property name="ElementShortName">seg7_seg[6:0]</obj_property>
+      <obj_property name="ObjectShortName">seg7_seg[6:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/seg7_an" type="array">
+      <obj_property name="ElementShortName">seg7_an[3:0]</obj_property>
+      <obj_property name="ObjectShortName">seg7_an[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/seg7_dp" type="logic">
+      <obj_property name="ElementShortName">seg7_dp</obj_property>
+      <obj_property name="ObjectShortName">seg7_dp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/dut/decimal_point" type="logic">
+      <obj_property name="ElementShortName">decimal_point</obj_property>
+      <obj_property name="ObjectShortName">decimal_point</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SEG_1" type="array">
+      <obj_property name="ElementShortName">SEG_1[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SEG_1[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SEG_2" type="array">
+      <obj_property name="ElementShortName">SEG_2[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SEG_2[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SEG_3" type="array">
+      <obj_property name="ElementShortName">SEG_3[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SEG_3[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SEG_4" type="array">
+      <obj_property name="ElementShortName">SEG_4[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SEG_4[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SEG_BLANK" type="array">
+      <obj_property name="ElementShortName">SEG_BLANK[6:0]</obj_property>
+      <obj_property name="ObjectShortName">SEG_BLANK[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/AN_DIG0" type="array">
+      <obj_property name="ElementShortName">AN_DIG0[3:0]</obj_property>
+      <obj_property name="ObjectShortName">AN_DIG0[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/AN_DIG1" type="array">
+      <obj_property name="ElementShortName">AN_DIG1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">AN_DIG1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/AN_DIG2" type="array">
+      <obj_property name="ElementShortName">AN_DIG2[3:0]</obj_property>
+      <obj_property name="ObjectShortName">AN_DIG2[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/AN_DIG3" type="array">
+      <obj_property name="ElementShortName">AN_DIG3[3:0]</obj_property>
+      <obj_property name="ObjectShortName">AN_DIG3[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/seg7_top_tb/SCAN_TIMEOUT" type="array">
+      <obj_property name="ElementShortName">SCAN_TIMEOUT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SCAN_TIMEOUT[31:0]</obj_property>
+   </wvobject>
+</wave_config>

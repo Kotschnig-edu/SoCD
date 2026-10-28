@@ -61,14 +61,6 @@ COMPONENT soc_top
     apb_0_pslverr : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     apb_0_pwdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     apb_0_pwrite : OUT STD_LOGIC;
-    apb_1_paddr : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    apb_1_penable : OUT STD_LOGIC;
-    apb_1_prdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    apb_1_pready : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    apb_1_psel : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
-    apb_1_pslverr : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
-    apb_1_pwdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    apb_1_pwrite : OUT STD_LOGIC;
     uart_rxd : IN STD_LOGIC;
     uart_txd : OUT STD_LOGIC;
     gpio_rtl_0_tri_i : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -76,7 +68,26 @@ COMPONENT soc_top
     gpio_rtl_0_tri_t : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     pwm : OUT STD_LOGIC;
     clk_100MHz : IN STD_LOGIC;
-    reset_n : IN STD_LOGIC
+    reset_n : IN STD_LOGIC;
+    ahb_0_haddr : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ahb_0_hburst : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+    ahb_0_hmastlock : OUT STD_LOGIC;
+    ahb_0_hprot : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+    ahb_0_hrdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ahb_0_hready : IN STD_LOGIC;
+    ahb_0_hresp : IN STD_LOGIC;
+    ahb_0_hsize : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+    ahb_0_htrans : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+    ahb_0_hwdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    ahb_0_hwrite : OUT STD_LOGIC;
+    apb_1_paddr : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    apb_1_penable : OUT STD_LOGIC;
+    apb_1_prdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+    apb_1_pready : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+    apb_1_psel : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+    apb_1_pslverr : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+    apb_1_pwdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    apb_1_pwrite : OUT STD_LOGIC
   );
 END COMPONENT;
 -- COMP_TAG_END ------  End cut for COMPONENT Declaration  ------
@@ -95,14 +106,6 @@ your_instance_name : soc_top
     apb_0_pslverr => apb_0_pslverr,
     apb_0_pwdata => apb_0_pwdata,
     apb_0_pwrite => apb_0_pwrite,
-    apb_1_paddr => apb_1_paddr,
-    apb_1_penable => apb_1_penable,
-    apb_1_prdata => apb_1_prdata,
-    apb_1_pready => apb_1_pready,
-    apb_1_psel => apb_1_psel,
-    apb_1_pslverr => apb_1_pslverr,
-    apb_1_pwdata => apb_1_pwdata,
-    apb_1_pwrite => apb_1_pwrite,
     uart_rxd => uart_rxd,
     uart_txd => uart_txd,
     gpio_rtl_0_tri_i => gpio_rtl_0_tri_i,
@@ -110,7 +113,26 @@ your_instance_name : soc_top
     gpio_rtl_0_tri_t => gpio_rtl_0_tri_t,
     pwm => pwm,
     clk_100MHz => clk_100MHz,
-    reset_n => reset_n
+    reset_n => reset_n,
+    ahb_0_haddr => ahb_0_haddr,
+    ahb_0_hburst => ahb_0_hburst,
+    ahb_0_hmastlock => ahb_0_hmastlock,
+    ahb_0_hprot => ahb_0_hprot,
+    ahb_0_hrdata => ahb_0_hrdata,
+    ahb_0_hready => ahb_0_hready,
+    ahb_0_hresp => ahb_0_hresp,
+    ahb_0_hsize => ahb_0_hsize,
+    ahb_0_htrans => ahb_0_htrans,
+    ahb_0_hwdata => ahb_0_hwdata,
+    ahb_0_hwrite => ahb_0_hwrite,
+    apb_1_paddr => apb_1_paddr,
+    apb_1_penable => apb_1_penable,
+    apb_1_prdata => apb_1_prdata,
+    apb_1_pready => apb_1_pready,
+    apb_1_psel => apb_1_psel,
+    apb_1_pslverr => apb_1_pslverr,
+    apb_1_pwdata => apb_1_pwdata,
+    apb_1_pwrite => apb_1_pwrite
   );
 -- INST_TAG_END ------  End cut for INSTANTIATION Template  ------
 

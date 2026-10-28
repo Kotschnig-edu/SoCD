@@ -312,6 +312,24 @@
                 "MA": "Data",
                 "MX": "/microblaze_riscv_0",
                 "MI": "M_AXI_DP",
+                "MS": "SEG_ahb_0_Reg",
+                "MV": "xilinx.com:ip:microblaze_riscv:1.0",
+                "SX": "/",
+                "SI": "ahb_0",
+                "SS": "Reg",
+                "SV": "::soc_top_imp:",
+                "TM": "data",
+                "TU": "register"
+            },
+            "V10": {
+                "VT": "AC",
+                "BA": "0x44A20000",
+                "HA": "0x44A2FFFF",
+                "BP": "C_BASEADDR",
+                "HP": "C_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_riscv_0",
+                "MI": "M_AXI_DP",
                 "MS": "SEG_apb_1_Reg",
                 "MV": "xilinx.com:ip:microblaze_riscv:1.0",
                 "SX": "/",
@@ -363,6 +381,11 @@
             },
             {
                 "src": "V9",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V10",
                 "trg": "V2",
                 "EH": "2"
             }

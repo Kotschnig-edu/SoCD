@@ -2,8 +2,8 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Wed Oct  7 11:01:27 2026
-//Host        : R02738 running 64-bit major release  (build 9200)
+//Date        : Wed Oct 28 11:43:29 2026
+//Host        : R02280 running 64-bit major release  (build 9200)
 //Command     : generate_target soc_top_wrapper.bd
 //Design      : soc_top_wrapper
 //Purpose     : IP block netlist
@@ -11,7 +11,18 @@
 `timescale 1 ps / 1 ps
 
 module soc_top_wrapper
-   (apb_0_paddr,
+   (ahb_0_haddr,
+    ahb_0_hburst,
+    ahb_0_hmastlock,
+    ahb_0_hprot,
+    ahb_0_hrdata,
+    ahb_0_hready,
+    ahb_0_hresp,
+    ahb_0_hsize,
+    ahb_0_htrans,
+    ahb_0_hwdata,
+    ahb_0_hwrite,
+    apb_0_paddr,
     apb_0_penable,
     apb_0_prdata,
     apb_0_pready,
@@ -33,6 +44,17 @@ module soc_top_wrapper
     reset_n,
     uart_rxd,
     uart_txd);
+  output [31:0]ahb_0_haddr;
+  output [2:0]ahb_0_hburst;
+  output ahb_0_hmastlock;
+  output [3:0]ahb_0_hprot;
+  input [31:0]ahb_0_hrdata;
+  input ahb_0_hready;
+  input ahb_0_hresp;
+  output [2:0]ahb_0_hsize;
+  output [1:0]ahb_0_htrans;
+  output [31:0]ahb_0_hwdata;
+  output ahb_0_hwrite;
   output [31:0]apb_0_paddr;
   output apb_0_penable;
   input [31:0]apb_0_prdata;
@@ -56,6 +78,17 @@ module soc_top_wrapper
   input uart_rxd;
   output uart_txd;
 
+  wire [31:0]ahb_0_haddr;
+  wire [2:0]ahb_0_hburst;
+  wire ahb_0_hmastlock;
+  wire [3:0]ahb_0_hprot;
+  wire [31:0]ahb_0_hrdata;
+  wire ahb_0_hready;
+  wire ahb_0_hresp;
+  wire [2:0]ahb_0_hsize;
+  wire [1:0]ahb_0_htrans;
+  wire [31:0]ahb_0_hwdata;
+  wire ahb_0_hwrite;
   wire [31:0]apb_0_paddr;
   wire apb_0_penable;
   wire [31:0]apb_0_prdata;
@@ -367,7 +400,18 @@ module soc_top_wrapper
         .O(gpio_rtl_0_tri_i_9),
         .T(gpio_rtl_0_tri_t_9));
   soc_top soc_top_i
-       (.apb_0_paddr(apb_0_paddr),
+       (.ahb_0_haddr(ahb_0_haddr),
+        .ahb_0_hburst(ahb_0_hburst),
+        .ahb_0_hmastlock(ahb_0_hmastlock),
+        .ahb_0_hprot(ahb_0_hprot),
+        .ahb_0_hrdata(ahb_0_hrdata),
+        .ahb_0_hready(ahb_0_hready),
+        .ahb_0_hresp(ahb_0_hresp),
+        .ahb_0_hsize(ahb_0_hsize),
+        .ahb_0_htrans(ahb_0_htrans),
+        .ahb_0_hwdata(ahb_0_hwdata),
+        .ahb_0_hwrite(ahb_0_hwrite),
+        .apb_0_paddr(apb_0_paddr),
         .apb_0_penable(apb_0_penable),
         .apb_0_prdata(apb_0_prdata),
         .apb_0_pready(apb_0_pready),

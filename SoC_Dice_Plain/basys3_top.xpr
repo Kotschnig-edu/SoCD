@@ -59,20 +59,20 @@
     <Option Name="IPUserFilesDir" Val="$PIPUSERFILESDIR"/>
     <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="71"/>
+    <Option Name="WTXSimLaunchSim" Val="75"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="2"/>
-    <Option Name="WTModelSimExportSim" Val="2"/>
-    <Option Name="WTQuestaExportSim" Val="2"/>
+    <Option Name="WTXSimExportSim" Val="4"/>
+    <Option Name="WTModelSimExportSim" Val="4"/>
+    <Option Name="WTQuestaExportSim" Val="4"/>
     <Option Name="WTIesExportSim" Val="0"/>
     <Option Name="WTVcsExportSim" Val="0"/>
-    <Option Name="WTRivieraExportSim" Val="2"/>
-    <Option Name="WTActivehdlExportSim" Val="2"/>
+    <Option Name="WTRivieraExportSim" Val="4"/>
+    <Option Name="WTActivehdlExportSim" Val="4"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -131,6 +131,9 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="soc_top.bd" FileRelPathName="ip\soc_top_axi_ahblite_bridge_0_0\soc_top_axi_ahblite_bridge_0_0.xci">
+          <Proxy FileSetName="soc_top_axi_ahblite_bridge_0_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="soc_top.bd" FileRelPathName="ip\soc_top_axi_apb_bridge_0_1\soc_top_axi_apb_bridge_0_1.xci">
           <Proxy FileSetName="soc_top_axi_apb_bridge_0_1"/>
         </CompFileExtendedInfo>
@@ -139,6 +142,9 @@
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="soc_top.bd" FileRelPathName="ip\soc_top_axi_intc_0_0\soc_top_axi_intc_0_0.xci">
           <Proxy FileSetName="soc_top_axi_intc_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="soc_top.bd" FileRelPathName="ip\soc_top_axi_protocol_convert_0_0\soc_top_axi_protocol_convert_0_0.xci">
+          <Proxy FileSetName="soc_top_axi_protocol_convert_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="soc_top.bd" FileRelPathName="ip\soc_top_axi_smc_0\soc_top_axi_smc_0.xci">
           <Proxy FileSetName="soc_top_axi_smc_0"/>
@@ -239,6 +245,11 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/seg7_top_tb_behav.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="seg7_top_tb"/>
@@ -253,6 +264,7 @@
         <Option Name="PamPseudoTop" Val="pseudo_tb"/>
         <Option Name="SrcSet" Val="sources_1"/>
         <Option Name="XSimWcfgFile" Val="$PPRDIR/top_tb_behav.wcfg"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/seg7_top_tb_behav.wcfg"/>
         <Option Name="CosimPdi" Val=""/>
         <Option Name="CosimPlatform" Val=""/>
         <Option Name="CosimElf" Val=""/>
@@ -339,6 +351,18 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
+    <FileSet Name="soc_top_axi_ahblite_bridge_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/soc_top_axi_ahblite_bridge_0_0" RelGenDir="$PGENDIR/soc_top_axi_ahblite_bridge_0_0">
+      <Config>
+        <Option Name="TopModule" Val="soc_top_axi_ahblite_bridge_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
+    <FileSet Name="soc_top_axi_protocol_convert_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/soc_top_axi_protocol_convert_0_0" RelGenDir="$PGENDIR/soc_top_axi_protocol_convert_0_0">
+      <Config>
+        <Option Name="TopModule" Val="soc_top_axi_protocol_convert_0_0"/>
+        <Option Name="UseBlackboxStub" Val="1"/>
+      </Config>
+    </FileSet>
   </FileSets>
   <Simulators>
     <Simulator Name="XSim">
@@ -372,9 +396,7 @@
     </Run>
     <Run Id="soc_top_microblaze_riscv_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_microblaze_riscv_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_microblaze_riscv_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_microblaze_riscv_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_microblaze_riscv_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_microblaze_riscv_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -384,9 +406,7 @@
     </Run>
     <Run Id="soc_top_lmb_bram_if_cntlr_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_lmb_bram_if_cntlr_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_lmb_bram_if_cntlr_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_lmb_bram_if_cntlr_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_lmb_bram_if_cntlr_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_lmb_bram_if_cntlr_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -396,9 +416,7 @@
     </Run>
     <Run Id="soc_top_blk_mem_gen_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_blk_mem_gen_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_blk_mem_gen_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_blk_mem_gen_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_blk_mem_gen_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_blk_mem_gen_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -408,9 +426,7 @@
     </Run>
     <Run Id="soc_top_proc_sys_reset_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_proc_sys_reset_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_proc_sys_reset_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_proc_sys_reset_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_proc_sys_reset_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_proc_sys_reset_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -420,9 +436,7 @@
     </Run>
     <Run Id="soc_top_mdm_riscv_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_mdm_riscv_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_mdm_riscv_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_mdm_riscv_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_mdm_riscv_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_mdm_riscv_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -432,9 +446,7 @@
     </Run>
     <Run Id="soc_top_axi_intc_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_intc_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_intc_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_intc_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_intc_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_intc_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -444,9 +456,7 @@
     </Run>
     <Run Id="soc_top_axi_timer_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_timer_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_timer_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_timer_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_timer_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_timer_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -456,9 +466,7 @@
     </Run>
     <Run Id="soc_top_axi_gpio_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_gpio_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_gpio_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_gpio_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_gpio_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_gpio_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -468,9 +476,7 @@
     </Run>
     <Run Id="soc_top_axi_uartlite_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_uartlite_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_uartlite_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_uartlite_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_uartlite_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_uartlite_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -479,6 +485,26 @@
       <RQSFiles/>
     </Run>
     <Run Id="soc_top_axi_smc_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_smc_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_smc_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_smc_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_smc_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_smc_0_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="soc_top_axi_apb_bridge_0_1_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_apb_bridge_0_1" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_apb_bridge_0_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_apb_bridge_0_1_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_synth_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025"/>
+        <Step Id="synth_design"/>
+      </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
+      <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="soc_top_axi_ahblite_bridge_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_ahblite_bridge_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_ahblite_bridge_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_ahblite_bridge_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_ahblite_bridge_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_ahblite_bridge_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -490,7 +516,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="soc_top_axi_apb_bridge_0_1_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_apb_bridge_0_1" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_apb_bridge_0_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_apb_bridge_0_1_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_synth_1" ParallelReportGen="true">
+    <Run Id="soc_top_axi_protocol_convert_0_0_synth_1" Type="Ft3:Synth" SrcSet="soc_top_axi_protocol_convert_0_0" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_protocol_convert_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/soc_top_axi_protocol_convert_0_0_synth_1" IncludeInArchive="true" IsChild="false" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_protocol_convert_0_0_synth_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_protocol_convert_0_0_synth_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2025">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -521,9 +547,7 @@
     </Run>
     <Run Id="soc_top_microblaze_riscv_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_microblaze_riscv_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_microblaze_riscv_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_microblaze_riscv_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_microblaze_riscv_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -540,9 +564,7 @@
     </Run>
     <Run Id="soc_top_lmb_bram_if_cntlr_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_lmb_bram_if_cntlr_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_lmb_bram_if_cntlr_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_lmb_bram_if_cntlr_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_lmb_bram_if_cntlr_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -559,9 +581,7 @@
     </Run>
     <Run Id="soc_top_blk_mem_gen_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_blk_mem_gen_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_blk_mem_gen_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_blk_mem_gen_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_blk_mem_gen_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -578,9 +598,7 @@
     </Run>
     <Run Id="soc_top_proc_sys_reset_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_proc_sys_reset_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_proc_sys_reset_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_proc_sys_reset_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_proc_sys_reset_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -597,9 +615,7 @@
     </Run>
     <Run Id="soc_top_mdm_riscv_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_mdm_riscv_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_mdm_riscv_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_mdm_riscv_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_mdm_riscv_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -616,9 +632,7 @@
     </Run>
     <Run Id="soc_top_axi_intc_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_intc_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_intc_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_intc_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_intc_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -635,9 +649,7 @@
     </Run>
     <Run Id="soc_top_axi_timer_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_timer_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_timer_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_timer_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_timer_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -654,9 +666,7 @@
     </Run>
     <Run Id="soc_top_axi_gpio_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_gpio_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_gpio_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_gpio_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_gpio_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -673,9 +683,7 @@
     </Run>
     <Run Id="soc_top_axi_uartlite_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_uartlite_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_uartlite_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_uartlite_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_uartlite_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -691,6 +699,40 @@
       <RQSFiles/>
     </Run>
     <Run Id="soc_top_axi_smc_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_smc_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_smc_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_smc_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_smc_0_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="soc_top_axi_apb_bridge_0_1_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_apb_bridge_0_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_apb_bridge_0_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_impl_1" ParallelReportGen="true">
+      <Strategy Version="1" Minor="2">
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
+        <Step Id="init_design"/>
+        <Step Id="opt_design"/>
+        <Step Id="power_opt_design"/>
+        <Step Id="place_design"/>
+        <Step Id="post_place_power_opt_design"/>
+        <Step Id="phys_opt_design"/>
+        <Step Id="route_design"/>
+        <Step Id="post_route_phys_opt_design"/>
+        <Step Id="write_bitstream"/>
+      </Strategy>
+      <ReportStrategy Name="Vivado Implementation Default Reports" Flow="Vivado Implementation 2025"/>
+      <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
+      <RQSFiles/>
+    </Run>
+    <Run Id="soc_top_axi_ahblite_bridge_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_ahblite_bridge_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_ahblite_bridge_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_ahblite_bridge_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_ahblite_bridge_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
           <Desc>Default settings for Implementation.</Desc>
@@ -709,7 +751,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="soc_top_axi_apb_bridge_0_1_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_apb_bridge_0_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_apb_bridge_0_1_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_apb_bridge_0_1_impl_1" ParallelReportGen="true">
+    <Run Id="soc_top_axi_protocol_convert_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7a35tcpg236-2" ConstrsSet="soc_top_axi_protocol_convert_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="soc_top_axi_protocol_convert_0_0_synth_1" IncludeInArchive="false" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/soc_top_axi_protocol_convert_0_0_impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/soc_top_axi_protocol_convert_0_0_impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
           <Desc>Default settings for Implementation.</Desc>

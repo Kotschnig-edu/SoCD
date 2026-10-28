@@ -9,16 +9,16 @@ module ahb3lite_master_bfm #(
 
 //  AHB Master Interface
   output reg                    HSEL,
-  output reg [HADDR_SIZE-10]   HADDR,
-  output reg [HDATA_SIZE-10]   HWDATA,
-  input      [HDATA_SIZE-10]   HRDATA,
+  output reg [HADDR_SIZE  -1:0] HADDR,
+  output reg [HDATA_SIZE  -1:0] HWDATA,
+  input      [HDATA_SIZE  -1:0] HRDATA,
   output reg                    HWRITE,
-  output reg [           20]   HSIZE,
-  output reg [           20]   HBURST,
-  output reg [           30]   HPROT,
-  output reg [           10]   HTRANS,
+  output reg [             2:0] HSIZE,
+  output reg [             2:0] HBURST,
+  output reg [             3:0] HPROT,
+  output reg [             1:0] HTRANS,
   output reg                    HMASTLOCK,
-  output reg [HMASTER_SIZE-10] HMASTER,
+  output reg [HMASTER_SIZE-1:0] HMASTER,
   input                         HREADY,
   input                         HRESP
 );
@@ -26,19 +26,19 @@ module ahb3lite_master_bfm #(
   always @(negedge HRESETn) reset();
 
 
-  
-  
-   Constants
-  
-  import ahb3lite_pkg;
+  //////////////////////////////////////////////////////////////////
+  //
+  // Constants
+  //
+  import ahb3lite_pkg::*;
 
 
-  
-  
-   Tasks
-  
+  //////////////////////////////////////////////////////////////////
+  //
+  // Tasks
+  //
   task reset();
-    Reset AHB Bus
+    //Reset AHB Bus
     HSEL      = 1'b0;
     HADDR     = 'h0;
     HWDATA    = 'h0;
@@ -55,8 +55,8 @@ module ahb3lite_master_bfm #(
 
 
   task idle ();
-    Put AHB Bus in IDLE state
-    Call after write or read sequence
+    //Put AHB Bus in IDLE state
+    //Call after write or read sequence
     wait4hready();
     HSEL      = 1'b0;
     HTRANS    = HTRANS_IDLE;
@@ -64,17 +64,17 @@ module ahb3lite_master_bfm #(
 
 
   task automatic write (
-    input     [HADDR_SIZE-10] address,
-    const ref [HDATA_SIZE-10] data[],
-    input [HDATA_SIZE  -10] data[],
-    input [             20] size,
-    input [HMASTER_SIZE-10] master,
-    input [             20] burst
+    input     [HADDR_SIZE  -1:0] address,
+//    const ref [HDATA_SIZE  -1:0] data[],
+    input     [HDATA_SIZE  -1:0] data[],
+    input     [             2:0] size,
+    input     [HMASTER_SIZE-1:0] master,
+    input     [             2:0] burst
   );
     int beats;
 
     beats = get_beats_per_burst(burst);
-    if (beats  0) beats = data.size();
+    if (beats < 0) beats = data.size();
 
     fork
         ahb_cmd(address, size, master, burst, 1'b1, beats);
@@ -84,16 +84,16 @@ module ahb3lite_master_bfm #(
 
 
   task automatic read (
-    input [HADDR_SIZE  -10] address,
-    inout [HDATA_SIZE  -10] data[],
-    input [             20] size,
-    input [HMASTER_SIZE-10] master,
-    input [             20] burst
+    input [HADDR_SIZE  -1:0] address,
+    inout [HDATA_SIZE  -1:0] data[],
+    input [             2:0] size,
+    input [HMASTER_SIZE-1:0] master,
+    input [             2:0] burst
   );
     int beats;
 
     beats = get_beats_per_burst(burst);
-    if (beats  0) beats = data.size();
+    if (beats < 0) beats = data.size();
 
     fork
         ahb_cmd(address, size, master, burst, 1'b0, beats);
@@ -102,20 +102,20 @@ module ahb3lite_master_bfm #(
   endtask
 
   task automatic read_blocking (
-    input [HADDR_SIZE  -10] address,
-    inout [HDATA_SIZE  -10] data[],
-    input [             20] size,
-    input [HMASTER_SIZE-10] master,
-    input [             20] burst
+    input [HADDR_SIZE  -1:0] address,
+    inout [HDATA_SIZE  -1:0] data[],
+    input [             2:0] size,
+    input [HMASTER_SIZE-1:0] master,
+    input [             2:0] burst
   );
     int beats;
 
     beats = get_beats_per_burst(burst);
-    if (beats  0) beats = data.size();
+    if (beats < 0) beats = data.size();
 
     fork
         begin
-           Trigger
+          //Trigger
           ahb_cmd (address, size, master, burst, 1'b0, beats);
           idle    ();
         end
@@ -123,22 +123,22 @@ module ahb3lite_master_bfm #(
     join
   endtask
 
-  
-  
-   Sub-Tasks
-  
+  //////////////////////////////////////////////////////////////////
+  //
+  // Sub-Tasks
+  //
   task wait4hready;
     do
       @(posedge HCLK);
     while (!HREADY);
-  endtask  wait4hready
+  endtask : wait4hready
 
 
   task automatic ahb_cmd (
-    input [HADDR_SIZE-  10] addr,
-    input [             20] size,
-    input [HMASTER_SIZE-10] master,
-    input [             20] burst,
+    input [HADDR_SIZE  -1:0] addr,
+    input [             2:0] size,
+    input [HMASTER_SIZE-1:0] master,
+    input [             2:0] burst,
     input                    rw,
     input int                beats
   );
@@ -159,121 +159,121 @@ module ahb3lite_master_bfm #(
         HADDR  = next_address(size,burst);
         HTRANS = HTRANS_SEQ;
     end
-  endtask  ahb_cmd
+  endtask : ahb_cmd
 
 
   task automatic ahb_data (
-    input [HADDR_SIZE-10] address,
-    input [           20] size,
-    input [           20] burst,
+    input [HADDR_SIZE-1:0] address,
+    input [           2:0] size,
+    input [           2:0] burst,
     input                  rw,
     input int              beats,
-    inout [HDATA_SIZE-10] data[]
+    inout [HDATA_SIZE-1:0] data[]
   );
-    logic [(HDATA_SIZE+7)8 -10] byte_offset;
-    logic [HDATA_SIZE       -10] data_copy[],
+    logic [(HDATA_SIZE+7)/8 -1:0] byte_offset;
+    logic [HDATA_SIZE       -1:0] data_copy[],
                                   tmp_var;
 
     if (!rw)
     begin
         HWDATA = 'hx;
 
-        extra cycle for reading
-        read at the end of the cycle
+        //extra cycle for reading
+        //read at the end of the cycle
         wait4hready();
     end
     else
     begin
-        copy data, prevent it being overwritten by caller
+        //copy data, prevent it being overwritten by caller
         data_copy = data;
     end
 
     wait4hready();
 
-    get the address offset. No checks if the offset is legal
-    byte_offset = address % (HDATA_SIZE8);
+    //get the address offset. No checks if the offset is legal
+    byte_offset = address % (HDATA_SIZE/8);
 
-    transfer beats
-    for (int nbeat = 0; nbeat  beats; nbeat++)
+    //transfer beats
+    for (int nbeat = 0; nbeat < beats; nbeat++)
     begin
         wait4hready();
 
         if (rw)
         begin
-            writing ... transfer from data-buffer to AHB-HWDATA
+            //writing ... transfer from data-buffer to AHB-HWDATA
             HWDATA = 'hx;
 
-            'byte' is reserved, so use nbyte
-            for (int nbyte = 0; nbyte  get_bytes_per_beat(size); nbyte++)
-              HWDATA[(nbyte + byte_offset)8 + 8] = data_copy[nbeat][nbyte8 + 8];
+            //'byte' is reserved, so use nbyte
+            for (int nbyte = 0; nbyte < get_bytes_per_beat(size); nbyte++)
+              HWDATA[(nbyte + byte_offset)*8 +: 8] = data_copy[nbeat][nbyte*8 +: 8];
         end
         else
         begin
-            reading ... transfer from AHB-HRDATA to data-buffer
+            //reading ... transfer from AHB-HRDATA to data-buffer
 
-            'byte' is reserved, so use nbyte
-            Store in temporary variable.
-              Using data[nbeat] directly fails when calling with a multi-dimensional dynamic array. Why
-            for (int nbyte = 0; nbyte  get_bytes_per_beat(size); nbyte++)
-              tmp_var[nbyte8 + 8] = HRDATA[(nbyte+byte_offset)8 + 8];
+            //'byte' is reserved, so use nbyte
+            //Store in temporary variable.
+            //  Using data[nbeat] directly fails when calling with a multi-dimensional dynamic array. Why?
+            for (int nbyte = 0; nbyte < get_bytes_per_beat(size); nbyte++)
+              tmp_var[nbyte*8 +: 8] = HRDATA[(nbyte+byte_offset)*8 +: 8];
 
-            copy read-data
+            //copy read-data
             data[nbeat] = tmp_var;
         end
 
-        byte_offset += get_bytes_per_beat(size) % (HDATA_SIZE8);
+        byte_offset += get_bytes_per_beat(size) % (HDATA_SIZE/8);
     end
-  endtask  ahb_data
+  endtask : ahb_data
 
 
 
-  
-  
-   Functions
-  
-  function int get_bytes_per_beat(input [20] hsize);
+  //////////////////////////////////////////////////////////////////
+  //
+  // Functions
+  //
+  function int get_bytes_per_beat(input [2:0] hsize);
     case (hsize)
-      HSIZE_B8    get_bytes_per_beat =   1;
-      HSIZE_B16   get_bytes_per_beat =   2;
-      HSIZE_B32   get_bytes_per_beat =   4;
-      HSIZE_B64   get_bytes_per_beat =   8;
-      HSIZE_B128  get_bytes_per_beat =  16;
-      HSIZE_B256  get_bytes_per_beat =  32;
-      HSIZE_B512  get_bytes_per_beat =  64;
-      HSIZE_B1024 get_bytes_per_beat = 128;
+      HSIZE_B8   : get_bytes_per_beat =   1;
+      HSIZE_B16  : get_bytes_per_beat =   2;
+      HSIZE_B32  : get_bytes_per_beat =   4;
+      HSIZE_B64  : get_bytes_per_beat =   8;
+      HSIZE_B128 : get_bytes_per_beat =  16;
+      HSIZE_B256 : get_bytes_per_beat =  32;
+      HSIZE_B512 : get_bytes_per_beat =  64;
+      HSIZE_B1024: get_bytes_per_beat = 128;
     endcase
-  endfunction  get_bytes_per_beat
+  endfunction : get_bytes_per_beat
 
 
-  function int get_beats_per_burst(input [20] hburst);
+  function int get_beats_per_burst(input [2:0] hburst);
     case (hburst)
-      HBURST_SINGLE get_beats_per_burst =  1;
-      HBURST_INCR   get_beats_per_burst = -1;
-      HBURST_INCR4  get_beats_per_burst =  4;
-      HBURST_WRAP4  get_beats_per_burst =  4;
-      HBURST_INCR8  get_beats_per_burst =  8;
-      HBURST_WRAP8  get_beats_per_burst =  8;
-      HBURST_INCR16 get_beats_per_burst = 16;
-      HBURST_WRAP16 get_beats_per_burst = 16;
+      HBURST_SINGLE: get_beats_per_burst =  1;
+      HBURST_INCR  : get_beats_per_burst = -1;
+      HBURST_INCR4 : get_beats_per_burst =  4;
+      HBURST_WRAP4 : get_beats_per_burst =  4;
+      HBURST_INCR8 : get_beats_per_burst =  8;
+      HBURST_WRAP8 : get_beats_per_burst =  8;
+      HBURST_INCR16: get_beats_per_burst = 16;
+      HBURST_WRAP16: get_beats_per_burst = 16;
     endcase
-  endfunction  get_beats_per_burst
+  endfunction : get_beats_per_burst
 
 
-  function [HADDR_SIZE-10] next_address(input [20] hsize, hburst);
-    generate address mask
+  function [HADDR_SIZE-1:0] next_address(input [2:0] hsize, hburst);
+    //generate address mask
     int          beats_per_burst;
-    logic [100] addr_mask;
+    logic [10:0] addr_mask;
 
     beats_per_burst = get_beats_per_burst(hburst);
-    beats_per_burst = beats_per_burst  0  beats_per_burst  1;
-    addr_mask = (get_bytes_per_beat(hsize)  beats_per_burst) -1;
+    beats_per_burst = beats_per_burst > 0 ? beats_per_burst : 1;
+    addr_mask = (get_bytes_per_beat(hsize) * beats_per_burst) -1;
 
     case (hburst)
-      HBURST_WRAP4  next_address = (HADDR & ~addr_mask)  ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
-      HBURST_WRAP8  next_address = (HADDR & ~addr_mask)  ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
-      HBURST_WRAP16 next_address = (HADDR & ~addr_mask)  ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
-      default       next_address = HADDR + get_bytes_per_beat(hsize);
+      HBURST_WRAP4 : next_address = (HADDR & ~addr_mask) | ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
+      HBURST_WRAP8 : next_address = (HADDR & ~addr_mask) | ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
+      HBURST_WRAP16: next_address = (HADDR & ~addr_mask) | ((HADDR + get_bytes_per_beat(hsize)) & addr_mask);
+      default      : next_address = HADDR + get_bytes_per_beat(hsize);
     endcase
-  endfunction  next_address
+  endfunction : next_address
 
-endmodule  ahb3lite_master_bfm
+endmodule : ahb3lite_master_bfm

@@ -76,7 +76,7 @@ module ledcntrl_top_tb;
     @(posedge clk);
 
     ahb_write(32'h0000_0014, {8'h00, 16'd1000, 8'd128}); // CFG: 1000 Hz, 50 % duty cycle
-
+    #750us
     // 1) All LEDs on
     ahb_write(32'h0000_0010, 32'h0000_ffff);             // CTL
     #HOLD;
@@ -99,7 +99,7 @@ module ledcntrl_top_tb;
     ahb_write(32'h0000_0000, 32'h0000_0001);             // INT_CLR
     wait (!int_out);
 
-    #100us;
+    #900us;
     $finish;
   end
 endmodule

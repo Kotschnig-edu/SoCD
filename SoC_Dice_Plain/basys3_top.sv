@@ -59,6 +59,11 @@ module basys3_top(
   logic [7:0] deb_din;
   logic [7:0] deb_dout;
   logic [7:0] deb_dout_pls;
+
+  // Lab 05: GPIO <-> switches / LEDs
+  logic [7:0]  sw_deb;        // Debounced switches 7..0
+  logic [31:0] gpio_o;        // GPIO output of the SoC
+  logic [15:0] ledcntrl_led;  // LED output of the AHB LED controller
             
    
   // Testmux
@@ -97,6 +102,23 @@ module basys3_top(
     .deb_fall_i(4'hf         ), // I; maximal count value
     .dout_pls_o(deb_dout_pls ), // O; Debounced output pulse 
     .dout_o    (deb_dout     )  // O; Debounced data out
+  );
+
+  // Lab 05: debounce sw[7:0] for the GPIO input
+  ste_debounce_array #(
+    .NBR      (8),
+    .SYNC     (8'hFF),
+    .CNT_W    (4),
+    .PLS_RISE (8'h00),
+    .PLS_FALL (8'h00)
+  ) u_sw_debounce_array(
+    .clk       (clk          ), // I; System clock 
+    .rst_n     (rst_n        ), // I; active low reset 
+    .din_i     (sw[7:0]      ), // I; Data in to be debounced
+    .deb_rise_i(4'hf         ), // I; maximal count value
+    .deb_fall_i(4'hf         ), // I; maximal count value
+    .dout_pls_o(             ), // O; Debounced output pulse (not used)
+    .dout_o    (sw_deb       )  // O; Debounced data out
   );
 
   // SoC
@@ -164,8 +186,12 @@ module basys3_top(
     .hresp     (ahb_0_hresp ),
 
     .int_out   (            ), // O; Interrupt (not connected)
-    .led_out   (led         )  // O; LED outputs
+    .led_out   (ledcntrl_led)  // O; LED outputs
   );
+
+  // Lab 05: LED[7:0] from GPIO output, LED[15:8] stay with the LED controller
+  assign led[7:0]  = gpio_o[7:0];
+  assign led[15:8] = ledcntrl_led[15:8];
 
 
   soc_top soc_top_i (
@@ -197,8 +223,8 @@ module basys3_top(
         .apb_1_pwdata (apb_1_pwdata ),
         .apb_1_pwrite (apb_1_pwrite ),
         .clk_100MHz   (clk),
-        .gpio_rtl_0_tri_i (32'haaaa_aaaa),
-        .gpio_rtl_0_tri_o (),
+        .gpio_rtl_0_tri_i ({16'h0000, sw_deb, 8'h00}), // switches on bits [15:8]
+        .gpio_rtl_0_tri_o (gpio_o),
         .gpio_rtl_0_tri_t (),
         .pwm          (pwm),
         .reset_n      (rst_n),
@@ -208,6 +234,4 @@ module basys3_top(
   
   
 endmodule
-`default_nettype wire 
-
-
+`default_nettype wire

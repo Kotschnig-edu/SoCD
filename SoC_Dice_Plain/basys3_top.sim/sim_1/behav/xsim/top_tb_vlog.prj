@@ -104,6 +104,7 @@ sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/dat
 "../../../../ledcntrl_top.sv" \
 "../../../../seg7_top_tb.sv" \
 "../../../../ledcntrl_top_tb.sv" \
+"../../../../top_tb.sv" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

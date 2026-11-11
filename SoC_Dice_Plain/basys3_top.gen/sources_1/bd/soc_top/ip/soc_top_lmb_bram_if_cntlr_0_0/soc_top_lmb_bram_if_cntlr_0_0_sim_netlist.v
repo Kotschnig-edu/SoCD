@@ -2,7 +2,7 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-// Date        : Wed Oct 28 10:26:32 2026
+// Date        : Wed Nov 11 10:55:08 2026
 // Host        : R02280 running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               c:/SoCD/SoC_Dice_Plain/basys3_top.gen/sources_1/bd/soc_top/ip/soc_top_lmb_bram_if_cntlr_0_0/soc_top_lmb_bram_if_cntlr_0_0_sim_netlist.v
@@ -29,6 +29,17 @@ module soc_top_lmb_bram_if_cntlr_0_0
     Sl_Wait,
     Sl_UE,
     Sl_CE,
+    LMB1_ABus,
+    LMB1_WriteDBus,
+    LMB1_AddrStrobe,
+    LMB1_ReadStrobe,
+    LMB1_WriteStrobe,
+    LMB1_BE,
+    Sl1_DBus,
+    Sl1_Ready,
+    Sl1_Wait,
+    Sl1_UE,
+    Sl1_CE,
     BRAM_Rst_A,
     BRAM_Clk_A,
     BRAM_Addr_A,
@@ -49,7 +60,18 @@ module soc_top_lmb_bram_if_cntlr_0_0
   (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB WAIT" *) output Sl_Wait;
   (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB UE" *) output Sl_UE;
   (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB CE" *) output Sl_CE;
-  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORT RST" *) (* x_interface_mode = "master BRAM_PORT" *) (* x_interface_parameter = "XIL_INTERFACENAME BRAM_PORT, MEM_SIZE 8192, MASTER_TYPE BRAM_CTRL, MEM_WIDTH 32, MEM_ECC NONE, READ_LATENCY 1" *) output BRAM_Rst_A;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 ABUS" *) (* x_interface_mode = "slave SLMB1" *) (* x_interface_parameter = "XIL_INTERFACENAME SLMB1, ADDR_WIDTH 32, DATA_WIDTH 32, READ_WRITE_MODE READ_ONLY, PROTOCOL STANDARD, HAS_PROT 0" *) input [0:31]LMB1_ABus;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 WRITEDBUS" *) input [0:31]LMB1_WriteDBus;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 ADDRSTROBE" *) input LMB1_AddrStrobe;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 READSTROBE" *) input LMB1_ReadStrobe;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 WRITESTROBE" *) input LMB1_WriteStrobe;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 BE" *) input [0:3]LMB1_BE;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 READDBUS" *) output [0:31]Sl1_DBus;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 READY" *) output Sl1_Ready;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 WAIT" *) output Sl1_Wait;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 UE" *) output Sl1_UE;
+  (* x_interface_info = "xilinx.com:interface:lmb:1.0 SLMB1 CE" *) output Sl1_CE;
+  (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORT RST" *) (* x_interface_mode = "master BRAM_PORT" *) (* x_interface_parameter = "XIL_INTERFACENAME BRAM_PORT, MEM_SIZE 131072, MASTER_TYPE BRAM_CTRL, MEM_WIDTH 32, MEM_ECC NONE, READ_LATENCY 1" *) output BRAM_Rst_A;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORT CLK" *) output BRAM_Clk_A;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORT ADDR" *) output [0:31]BRAM_Addr_A;
   (* x_interface_info = "xilinx.com:interface:bram:1.0 BRAM_PORT EN" *) output BRAM_EN_A;
@@ -64,6 +86,11 @@ module soc_top_lmb_bram_if_cntlr_0_0
   wire [0:31]BRAM_Dout_A;
   wire BRAM_EN_A;
   wire [0:3]BRAM_WEN_A;
+  wire [0:31]LMB1_ABus;
+  wire LMB1_AddrStrobe;
+  wire [0:3]LMB1_BE;
+  wire [0:31]LMB1_WriteDBus;
+  wire LMB1_WriteStrobe;
   wire [0:31]LMB_ABus;
   wire LMB_AddrStrobe;
   wire [0:3]LMB_BE;
@@ -71,6 +98,9 @@ module soc_top_lmb_bram_if_cntlr_0_0
   wire LMB_Rst;
   wire [0:31]LMB_WriteDBus;
   wire LMB_WriteStrobe;
+  wire [0:31]Sl1_DBus;
+  wire Sl1_Ready;
+  wire Sl1_Wait;
   wire [0:31]Sl_DBus;
   wire Sl_Ready;
   wire NLW_U0_BRAM_Rst_A_UNCONNECTED;
@@ -82,9 +112,7 @@ module soc_top_lmb_bram_if_cntlr_0_0
   wire NLW_U0_S_AXI_CTRL_RVALID_UNCONNECTED;
   wire NLW_U0_S_AXI_CTRL_WREADY_UNCONNECTED;
   wire NLW_U0_Sl1_CE_UNCONNECTED;
-  wire NLW_U0_Sl1_Ready_UNCONNECTED;
   wire NLW_U0_Sl1_UE_UNCONNECTED;
-  wire NLW_U0_Sl1_Wait_UNCONNECTED;
   wire NLW_U0_Sl2_CE_UNCONNECTED;
   wire NLW_U0_Sl2_Ready_UNCONNECTED;
   wire NLW_U0_Sl2_UE_UNCONNECTED;
@@ -116,7 +144,6 @@ module soc_top_lmb_bram_if_cntlr_0_0
   wire [1:0]NLW_U0_S_AXI_CTRL_BRESP_UNCONNECTED;
   wire [31:0]NLW_U0_S_AXI_CTRL_RDATA_UNCONNECTED;
   wire [1:0]NLW_U0_S_AXI_CTRL_RRESP_UNCONNECTED;
-  wire [0:31]NLW_U0_Sl1_DBus_UNCONNECTED;
   wire [0:31]NLW_U0_Sl2_DBus_UNCONNECTED;
   wire [0:31]NLW_U0_Sl3_DBus_UNCONNECTED;
   wire [0:31]NLW_U0_Sl4_DBus_UNCONNECTED;
@@ -125,6 +152,8 @@ module soc_top_lmb_bram_if_cntlr_0_0
   wire [0:31]NLW_U0_Sl7_DBus_UNCONNECTED;
 
   assign BRAM_Rst_A = \<const0> ;
+  assign Sl1_CE = \<const0> ;
+  assign Sl1_UE = \<const0> ;
   assign Sl_CE = \<const0> ;
   assign Sl_UE = \<const0> ;
   assign Sl_Wait = \<const0> ;
@@ -141,21 +170,21 @@ module soc_top_lmb_bram_if_cntlr_0_0
   (* C_ECC_STATUS_REGISTERS = "0" *) 
   (* C_FAMILY = "artix7" *) 
   (* C_FAULT_INJECT = "0" *) 
-  (* C_HIGHADDR = "64'b0000000000000000000000000000000000000000000000000001111111111111" *) 
+  (* C_HIGHADDR = "64'b0000000000000000000000000000000000000000000000011111111111111111" *) 
   (* C_INTERCONNECT = "0" *) 
   (* C_LMB_AWIDTH = "32" *) 
   (* C_LMB_DWIDTH = "32" *) 
   (* C_LMB_HAS_PROT = "0" *) 
   (* C_LMB_PROTOCOL = "0" *) 
   (* C_MASK = "64'b0000000000000000000000000000000001000000000000000000000000000000" *) 
-  (* C_MASK1 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
+  (* C_MASK1 = "64'b0000000000000000000000000000000000000000000000000000000000000000" *) 
   (* C_MASK2 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
   (* C_MASK3 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
   (* C_MASK4 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
   (* C_MASK5 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
   (* C_MASK6 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
   (* C_MASK7 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
-  (* C_NUM_LMB = "1" *) 
+  (* C_NUM_LMB = "2" *) 
   (* C_PROT_CFG = "8'b11111111" *) 
   (* C_PROT_CFG1 = "8'b11111111" *) 
   (* C_PROT_CFG2 = "8'b11111111" *) 
@@ -180,13 +209,13 @@ module soc_top_lmb_bram_if_cntlr_0_0
         .BRAM_WEN_A(BRAM_WEN_A),
         .CE(NLW_U0_CE_UNCONNECTED),
         .Interrupt(NLW_U0_Interrupt_UNCONNECTED),
-        .LMB1_ABus({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .LMB1_AddrStrobe(1'b0),
-        .LMB1_BE({1'b0,1'b0,1'b0,1'b0}),
+        .LMB1_ABus(LMB1_ABus),
+        .LMB1_AddrStrobe(LMB1_AddrStrobe),
+        .LMB1_BE(LMB1_BE),
         .LMB1_Prot({1'b0,1'b0}),
         .LMB1_ReadStrobe(1'b0),
-        .LMB1_WriteDBus({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .LMB1_WriteStrobe(1'b0),
+        .LMB1_WriteDBus(LMB1_WriteDBus),
+        .LMB1_WriteStrobe(LMB1_WriteStrobe),
         .LMB2_ABus({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .LMB2_AddrStrobe(1'b0),
         .LMB2_BE({1'b0,1'b0,1'b0,1'b0}),
@@ -258,10 +287,10 @@ module soc_top_lmb_bram_if_cntlr_0_0
         .S_AXI_CTRL_WSTRB({1'b0,1'b0,1'b0,1'b0}),
         .S_AXI_CTRL_WVALID(1'b0),
         .Sl1_CE(NLW_U0_Sl1_CE_UNCONNECTED),
-        .Sl1_DBus(NLW_U0_Sl1_DBus_UNCONNECTED[0:31]),
-        .Sl1_Ready(NLW_U0_Sl1_Ready_UNCONNECTED),
+        .Sl1_DBus(Sl1_DBus),
+        .Sl1_Ready(Sl1_Ready),
         .Sl1_UE(NLW_U0_Sl1_UE_UNCONNECTED),
-        .Sl1_Wait(NLW_U0_Sl1_Wait_UNCONNECTED),
+        .Sl1_Wait(Sl1_Wait),
         .Sl2_CE(NLW_U0_Sl2_CE_UNCONNECTED),
         .Sl2_DBus(NLW_U0_Sl2_DBus_UNCONNECTED[0:31]),
         .Sl2_Ready(NLW_U0_Sl2_Ready_UNCONNECTED),
@@ -303,12 +332,12 @@ endmodule
 (* C_ARBITRATION = "0" *) (* C_BASEADDR = "64'b0000000000000000000000000000000000000000000000000000000000000000" *) (* C_BRAM_AWIDTH = "32" *) 
 (* C_CE_COUNTER_WIDTH = "0" *) (* C_CE_FAILING_REGISTERS = "0" *) (* C_ECC = "0" *) 
 (* C_ECC_ONOFF_REGISTER = "0" *) (* C_ECC_ONOFF_RESET_VALUE = "1" *) (* C_ECC_STATUS_REGISTERS = "0" *) 
-(* C_FAMILY = "artix7" *) (* C_FAULT_INJECT = "0" *) (* C_HIGHADDR = "64'b0000000000000000000000000000000000000000000000000001111111111111" *) 
+(* C_FAMILY = "artix7" *) (* C_FAULT_INJECT = "0" *) (* C_HIGHADDR = "64'b0000000000000000000000000000000000000000000000011111111111111111" *) 
 (* C_INTERCONNECT = "0" *) (* C_LMB_AWIDTH = "32" *) (* C_LMB_DWIDTH = "32" *) 
 (* C_LMB_HAS_PROT = "0" *) (* C_LMB_PROTOCOL = "0" *) (* C_MASK = "64'b0000000000000000000000000000000001000000000000000000000000000000" *) 
-(* C_MASK1 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_MASK2 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_MASK3 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
+(* C_MASK1 = "64'b0000000000000000000000000000000000000000000000000000000000000000" *) (* C_MASK2 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_MASK3 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
 (* C_MASK4 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_MASK5 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_MASK6 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) 
-(* C_MASK7 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_NUM_LMB = "1" *) (* C_PROT_CFG = "8'b11111111" *) 
+(* C_MASK7 = "64'b0000000000000000000000000000000000000000100000000000000000000000" *) (* C_NUM_LMB = "2" *) (* C_PROT_CFG = "8'b11111111" *) 
 (* C_PROT_CFG1 = "8'b11111111" *) (* C_PROT_CFG2 = "8'b11111111" *) (* C_PROT_CFG3 = "8'b11111111" *) 
 (* C_PROT_CFG4 = "8'b11111111" *) (* C_PROT_CFG5 = "8'b11111111" *) (* C_PROT_CFG6 = "8'b11111111" *) 
 (* C_PROT_CFG7 = "8'b11111111" *) (* C_S_AXI_CTRL_ADDR_WIDTH = "32" *) (* C_S_AXI_CTRL_BASEADDR = "32'b11111111111111111111111111111111" *) 
@@ -571,8 +600,16 @@ module soc_top_lmb_bram_if_cntlr_0_0_lmb_bram_if_cntlr
   output Interrupt;
 
   wire \<const0> ;
+  wire [0:31]BRAM_Addr_A;
   wire [0:31]BRAM_Din_A;
+  wire [0:31]BRAM_Dout_A;
+  wire BRAM_EN_A;
   wire [0:3]BRAM_WEN_A;
+  wire [0:31]LMB1_ABus;
+  wire LMB1_AddrStrobe;
+  wire [0:3]LMB1_BE;
+  wire [0:31]LMB1_WriteDBus;
+  wire LMB1_WriteStrobe;
   wire [0:31]LMB_ABus;
   wire LMB_AddrStrobe;
   wire [0:3]LMB_BE;
@@ -580,16 +617,14 @@ module soc_top_lmb_bram_if_cntlr_0_0_lmb_bram_if_cntlr
   wire LMB_Rst;
   wire [0:31]LMB_WriteDBus;
   wire LMB_WriteStrobe;
-  wire \No_ECC.Sl_Rdy_i_1_n_0 ;
-  wire \No_ECC.lmb_as_i_1_n_0 ;
+  wire Sl1_Ready;
+  wire Sl1_Wait;
   wire Sl_Rdy;
   wire Sl_Ready;
   wire lmb_as;
+  wire lmb_mux_I_n_0;
 
-  assign BRAM_Addr_A[0:31] = LMB_ABus;
   assign BRAM_Clk_A = LMB_Clk;
-  assign BRAM_Dout_A[0:31] = LMB_WriteDBus;
-  assign BRAM_EN_A = LMB_AddrStrobe;
   assign BRAM_Rst_A = \<const0> ;
   assign CE = \<const0> ;
   assign Interrupt = \<const0> ;
@@ -635,41 +670,8 @@ module soc_top_lmb_bram_if_cntlr_0_0_lmb_bram_if_cntlr
   assign S_AXI_CTRL_RVALID = \<const0> ;
   assign S_AXI_CTRL_WREADY = \<const0> ;
   assign Sl1_CE = \<const0> ;
-  assign Sl1_DBus[0] = \<const0> ;
-  assign Sl1_DBus[1] = \<const0> ;
-  assign Sl1_DBus[2] = \<const0> ;
-  assign Sl1_DBus[3] = \<const0> ;
-  assign Sl1_DBus[4] = \<const0> ;
-  assign Sl1_DBus[5] = \<const0> ;
-  assign Sl1_DBus[6] = \<const0> ;
-  assign Sl1_DBus[7] = \<const0> ;
-  assign Sl1_DBus[8] = \<const0> ;
-  assign Sl1_DBus[9] = \<const0> ;
-  assign Sl1_DBus[10] = \<const0> ;
-  assign Sl1_DBus[11] = \<const0> ;
-  assign Sl1_DBus[12] = \<const0> ;
-  assign Sl1_DBus[13] = \<const0> ;
-  assign Sl1_DBus[14] = \<const0> ;
-  assign Sl1_DBus[15] = \<const0> ;
-  assign Sl1_DBus[16] = \<const0> ;
-  assign Sl1_DBus[17] = \<const0> ;
-  assign Sl1_DBus[18] = \<const0> ;
-  assign Sl1_DBus[19] = \<const0> ;
-  assign Sl1_DBus[20] = \<const0> ;
-  assign Sl1_DBus[21] = \<const0> ;
-  assign Sl1_DBus[22] = \<const0> ;
-  assign Sl1_DBus[23] = \<const0> ;
-  assign Sl1_DBus[24] = \<const0> ;
-  assign Sl1_DBus[25] = \<const0> ;
-  assign Sl1_DBus[26] = \<const0> ;
-  assign Sl1_DBus[27] = \<const0> ;
-  assign Sl1_DBus[28] = \<const0> ;
-  assign Sl1_DBus[29] = \<const0> ;
-  assign Sl1_DBus[30] = \<const0> ;
-  assign Sl1_DBus[31] = \<const0> ;
-  assign Sl1_Ready = \<const0> ;
+  assign Sl1_DBus[0:31] = BRAM_Din_A;
   assign Sl1_UE = \<const0> ;
-  assign Sl1_Wait = \<const0> ;
   assign Sl2_CE = \<const0> ;
   assign Sl2_DBus[0] = \<const0> ;
   assign Sl2_DBus[1] = \<const0> ;
@@ -891,72 +893,1363 @@ module soc_top_lmb_bram_if_cntlr_0_0_lmb_bram_if_cntlr
   assign Sl_UE = \<const0> ;
   assign Sl_Wait = \<const0> ;
   assign UE = \<const0> ;
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT3 #(
-    .INIT(8'h40)) 
-    \BRAM_WEN_A[0]_INST_0 
-       (.I0(LMB_ABus[1]),
-        .I1(LMB_WriteStrobe),
-        .I2(LMB_BE[0]),
-        .O(BRAM_WEN_A[0]));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT3 #(
-    .INIT(8'h40)) 
-    \BRAM_WEN_A[1]_INST_0 
-       (.I0(LMB_ABus[1]),
-        .I1(LMB_WriteStrobe),
-        .I2(LMB_BE[1]),
-        .O(BRAM_WEN_A[1]));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT3 #(
-    .INIT(8'h40)) 
-    \BRAM_WEN_A[2]_INST_0 
-       (.I0(LMB_ABus[1]),
-        .I1(LMB_WriteStrobe),
-        .I2(LMB_BE[2]),
-        .O(BRAM_WEN_A[2]));
-  (* SOFT_HLUTNM = "soft_lutpair0" *) 
-  LUT3 #(
-    .INIT(8'h40)) 
-    \BRAM_WEN_A[3]_INST_0 
-       (.I0(LMB_ABus[1]),
-        .I1(LMB_WriteStrobe),
-        .I2(LMB_BE[3]),
-        .O(BRAM_WEN_A[3]));
   GND GND
        (.G(\<const0> ));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT2 #(
-    .INIT(4'h1)) 
-    \No_ECC.Sl_Rdy_i_1 
-       (.I0(LMB_ABus[1]),
-        .I1(LMB_Rst),
-        .O(\No_ECC.Sl_Rdy_i_1_n_0 ));
   FDRE \No_ECC.Sl_Rdy_reg 
        (.C(LMB_Clk),
         .CE(1'b1),
-        .D(\No_ECC.Sl_Rdy_i_1_n_0 ),
+        .D(lmb_mux_I_n_0),
         .Q(Sl_Rdy),
-        .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair2" *) 
-  LUT2 #(
-    .INIT(4'h2)) 
-    \No_ECC.lmb_as_i_1 
-       (.I0(LMB_AddrStrobe),
-        .I1(LMB_Rst),
-        .O(\No_ECC.lmb_as_i_1_n_0 ));
+        .R(LMB_Rst));
   FDRE \No_ECC.lmb_as_reg 
        (.C(LMB_Clk),
         .CE(1'b1),
-        .D(\No_ECC.lmb_as_i_1_n_0 ),
+        .D(BRAM_EN_A),
         .Q(lmb_as),
-        .R(1'b0));
+        .R(LMB_Rst));
+  soc_top_lmb_bram_if_cntlr_0_0_lmb_mux lmb_mux_I
+       (.BRAM_Addr_A(BRAM_Addr_A),
+        .BRAM_Dout_A(BRAM_Dout_A),
+        .BRAM_EN_A(BRAM_EN_A),
+        .BRAM_WEN_A(BRAM_WEN_A),
+        .LMB1_ABus(LMB1_ABus),
+        .LMB1_AddrStrobe(LMB1_AddrStrobe),
+        .LMB1_AddrStrobe_0(lmb_mux_I_n_0),
+        .LMB1_BE(LMB1_BE),
+        .LMB1_WriteDBus(LMB1_WriteDBus),
+        .LMB1_WriteStrobe(LMB1_WriteStrobe),
+        .LMB_ABus(LMB_ABus),
+        .LMB_AddrStrobe(LMB_AddrStrobe),
+        .LMB_BE(LMB_BE),
+        .LMB_Clk(LMB_Clk),
+        .LMB_Rst(LMB_Rst),
+        .LMB_WriteDBus(LMB_WriteDBus),
+        .LMB_WriteStrobe(LMB_WriteStrobe),
+        .Sl1_Ready(Sl1_Ready),
+        .Sl1_Wait(Sl1_Wait),
+        .Sl_Rdy(Sl_Rdy),
+        .Sl_Ready(Sl_Ready),
+        .lmb_as(lmb_as));
+endmodule
+
+(* ORIG_REF_NAME = "lmb_mux" *) 
+module soc_top_lmb_bram_if_cntlr_0_0_lmb_mux
+   (LMB1_AddrStrobe_0,
+    BRAM_Dout_A,
+    BRAM_Addr_A,
+    BRAM_WEN_A,
+    BRAM_EN_A,
+    Sl1_Ready,
+    Sl1_Wait,
+    Sl_Ready,
+    LMB_Rst,
+    LMB_Clk,
+    LMB1_AddrStrobe,
+    LMB1_WriteStrobe,
+    LMB_ABus,
+    LMB_AddrStrobe,
+    LMB1_ABus,
+    LMB1_WriteDBus,
+    LMB1_BE,
+    LMB_WriteDBus,
+    LMB_BE,
+    LMB_WriteStrobe,
+    Sl_Rdy,
+    lmb_as);
+  output LMB1_AddrStrobe_0;
+  output [0:31]BRAM_Dout_A;
+  output [0:31]BRAM_Addr_A;
+  output [0:3]BRAM_WEN_A;
+  output BRAM_EN_A;
+  output Sl1_Ready;
+  output Sl1_Wait;
+  output Sl_Ready;
+  input LMB_Rst;
+  input LMB_Clk;
+  input LMB1_AddrStrobe;
+  input LMB1_WriteStrobe;
+  input [0:31]LMB_ABus;
+  input LMB_AddrStrobe;
+  input [0:31]LMB1_ABus;
+  input [0:31]LMB1_WriteDBus;
+  input [0:3]LMB1_BE;
+  input [0:31]LMB_WriteDBus;
+  input [0:3]LMB_BE;
+  input LMB_WriteStrobe;
+  input Sl_Rdy;
+  input lmb_as;
+
+  wire [0:31]BRAM_Addr_A;
+  wire \BRAM_Addr_A[0]_INST_0_i_1_n_0 ;
+  wire \BRAM_Addr_A[0]_INST_0_i_2_n_0 ;
+  wire \BRAM_Addr_A[0]_INST_0_i_3_n_0 ;
+  wire [0:31]BRAM_Dout_A;
+  wire BRAM_EN_A;
+  wire [0:3]BRAM_WEN_A;
+  wire \BRAM_WEN_A[0]_INST_0_i_1_n_0 ;
+  wire \BRAM_WEN_A[0]_INST_0_i_2_n_0 ;
+  wire \BRAM_WEN_A[0]_INST_0_i_3_n_0 ;
+  wire [0:31]LMB1_ABus;
+  wire LMB1_AddrStrobe;
+  wire LMB1_AddrStrobe_0;
+  wire [0:3]LMB1_BE;
+  wire [0:31]LMB1_WriteDBus;
+  wire LMB1_WriteStrobe;
+  wire [0:31]LMB_ABus;
+  wire LMB_AddrStrobe;
+  wire [0:3]LMB_BE;
+  wire LMB_Clk;
+  wire LMB_Rst;
+  wire [0:31]LMB_WriteDBus;
+  wire LMB_WriteStrobe;
+  wire Sl1_Ready;
+  wire Sl1_Wait;
+  wire Sl_Rdy;
+  wire Sl_Ready;
+  wire lmb_as;
+  wire [31:0]\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] ;
+  wire \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ;
+  wire \more_than_one_lmb.lmb_mux_generate[1].LMB_AddrStrobe_vec_Q_reg_n_0_[1] ;
+  wire [3:0]\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] ;
+  wire [31:0]\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] ;
+  wire \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteStrobe_vec_Q_reg_n_0_[1] ;
+  wire \more_than_one_lmb.lmb_mux_generate[1].wait_vec[1]_i_1_n_0 ;
+  wire \more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ;
+  wire \more_than_one_lmb.ongoing_Q ;
+  wire [0:0]\more_than_one_lmb.ongoing_new_0 ;
+
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[0]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[0]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[0]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [31]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[0]));
+  LUT4 #(
+    .INIT(16'h11F1)) 
+    \BRAM_Addr_A[0]_INST_0_i_1 
+       (.I0(LMB1_AddrStrobe),
+        .I1(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I2(LMB_AddrStrobe),
+        .I3(LMB_ABus[1]),
+        .O(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ));
+  LUT4 #(
+    .INIT(16'h4404)) 
+    \BRAM_Addr_A[0]_INST_0_i_2 
+       (.I0(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I1(LMB1_AddrStrobe),
+        .I2(LMB_AddrStrobe),
+        .I3(LMB_ABus[1]),
+        .O(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ));
+  LUT3 #(
+    .INIT(8'hD0)) 
+    \BRAM_Addr_A[0]_INST_0_i_3 
+       (.I0(LMB_AddrStrobe),
+        .I1(LMB_ABus[1]),
+        .I2(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .O(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[10]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[10]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[10]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [21]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[10]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[11]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[11]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[11]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [20]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[11]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[12]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[12]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[12]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [19]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[12]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[13]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[13]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[13]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [18]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[13]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[14]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[14]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[14]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [17]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[14]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[15]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[15]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[15]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [16]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[15]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[16]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[16]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[16]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [15]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[16]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[17]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[17]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[17]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [14]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[17]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[18]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[18]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[18]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [13]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[18]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[19]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[19]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[19]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [12]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[19]));
+  LUT6 #(
+    .INIT(64'hB0B080B0BBB888B8)) 
+    \BRAM_Addr_A[1]_INST_0 
+       (.I0(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [30]),
+        .I1(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I2(LMB_ABus[1]),
+        .I3(LMB1_AddrStrobe),
+        .I4(LMB1_ABus[1]),
+        .I5(LMB_AddrStrobe),
+        .O(BRAM_Addr_A[1]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[20]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[20]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[20]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [11]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[20]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[21]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[21]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[21]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [10]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[21]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[22]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[22]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[22]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [9]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[22]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[23]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[23]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[23]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [8]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[23]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[24]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[24]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[24]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [7]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[24]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[25]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[25]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[25]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [6]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[25]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[26]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[26]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[26]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [5]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[26]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[27]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[27]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[27]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [4]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[27]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[28]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[28]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[28]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [3]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[28]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[29]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[29]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[29]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [2]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[29]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[2]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[2]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[2]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [29]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[2]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[30]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[30]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[30]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [1]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[30]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[31]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[31]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[31]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [0]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[31]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[3]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[3]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[3]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [28]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[3]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[4]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[4]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[4]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [27]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[4]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[5]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[5]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[5]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [26]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[5]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[6]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[6]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[6]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [25]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[6]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[7]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[7]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[7]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [24]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[7]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[8]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[8]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[8]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [23]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[8]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Addr_A[9]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_ABus[9]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_ABus[9]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [22]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Addr_A[9]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[0]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[0]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[0]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [31]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[0]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[10]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[10]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[10]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [21]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[10]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[11]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[11]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[11]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [20]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[11]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[12]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[12]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[12]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [19]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[12]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[13]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[13]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[13]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [18]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[13]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[14]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[14]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[14]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [17]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[14]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[15]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[15]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[15]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [16]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[15]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[16]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[16]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[16]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [15]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[16]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[17]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[17]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[17]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [14]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[17]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[18]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[18]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[18]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [13]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[18]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[19]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[19]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[19]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [12]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[19]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[1]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[1]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[1]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [30]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[1]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[20]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[20]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[20]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [11]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[20]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[21]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[21]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[21]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [10]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[21]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[22]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[22]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[22]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [9]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[22]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[23]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[23]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[23]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [8]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[23]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[24]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[24]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[24]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [7]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[24]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[25]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[25]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[25]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [6]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[25]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[26]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[26]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[26]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [5]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[26]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[27]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[27]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[27]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [4]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[27]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[28]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[28]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[28]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [3]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[28]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[29]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[29]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[29]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [2]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[29]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[2]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[2]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[2]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [29]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[2]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[30]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[30]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[30]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [1]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[30]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[31]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[31]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[31]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [0]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[31]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[3]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[3]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[3]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [28]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[3]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[4]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[4]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[4]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [27]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[4]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[5]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[5]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[5]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [26]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[5]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[6]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[6]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[6]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [25]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[6]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[7]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[7]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[7]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [24]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[7]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[8]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[8]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[8]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [23]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[8]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_Dout_A[9]_INST_0 
+       (.I0(\BRAM_Addr_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_WriteDBus[9]),
+        .I2(\BRAM_Addr_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_WriteDBus[9]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [22]),
+        .I5(\BRAM_Addr_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_Dout_A[9]));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT5 #(
+    .INIT(32'hBABAFFF0)) 
+    BRAM_EN_A_INST_0
+       (.I0(\more_than_one_lmb.lmb_mux_generate[1].LMB_AddrStrobe_vec_Q_reg_n_0_[1] ),
+        .I1(LMB_ABus[1]),
+        .I2(LMB_AddrStrobe),
+        .I3(LMB1_AddrStrobe),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .O(BRAM_EN_A));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_WEN_A[0]_INST_0 
+       (.I0(\BRAM_WEN_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_BE[0]),
+        .I2(\BRAM_WEN_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_BE[0]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [3]),
+        .I5(\BRAM_WEN_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_WEN_A[0]));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT5 #(
+    .INIT(32'h44450000)) 
+    \BRAM_WEN_A[0]_INST_0_i_1 
+       (.I0(LMB_ABus[1]),
+        .I1(LMB_AddrStrobe),
+        .I2(LMB1_AddrStrobe),
+        .I3(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I4(LMB_WriteStrobe),
+        .O(\BRAM_WEN_A[0]_INST_0_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  LUT5 #(
+    .INIT(32'h00B00000)) 
+    \BRAM_WEN_A[0]_INST_0_i_2 
+       (.I0(LMB_ABus[1]),
+        .I1(LMB_AddrStrobe),
+        .I2(LMB1_AddrStrobe),
+        .I3(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I4(LMB1_WriteStrobe),
+        .O(\BRAM_WEN_A[0]_INST_0_i_2_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  LUT4 #(
+    .INIT(16'h8A00)) 
+    \BRAM_WEN_A[0]_INST_0_i_3 
+       (.I0(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I1(LMB_ABus[1]),
+        .I2(LMB_AddrStrobe),
+        .I3(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteStrobe_vec_Q_reg_n_0_[1] ),
+        .O(\BRAM_WEN_A[0]_INST_0_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_WEN_A[1]_INST_0 
+       (.I0(\BRAM_WEN_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_BE[1]),
+        .I2(\BRAM_WEN_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_BE[1]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [2]),
+        .I5(\BRAM_WEN_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_WEN_A[1]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_WEN_A[2]_INST_0 
+       (.I0(\BRAM_WEN_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_BE[2]),
+        .I2(\BRAM_WEN_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_BE[2]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [1]),
+        .I5(\BRAM_WEN_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_WEN_A[2]));
+  LUT6 #(
+    .INIT(64'hFFFFF888F888F888)) 
+    \BRAM_WEN_A[3]_INST_0 
+       (.I0(\BRAM_WEN_A[0]_INST_0_i_1_n_0 ),
+        .I1(LMB_BE[3]),
+        .I2(\BRAM_WEN_A[0]_INST_0_i_2_n_0 ),
+        .I3(LMB1_BE[3]),
+        .I4(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [0]),
+        .I5(\BRAM_WEN_A[0]_INST_0_i_3_n_0 ),
+        .O(BRAM_WEN_A[3]));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
+  LUT3 #(
+    .INIT(8'hEF)) 
+    \No_ECC.Sl_Rdy_i_1 
+       (.I0(LMB1_AddrStrobe),
+        .I1(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I2(LMB_ABus[1]),
+        .O(LMB1_AddrStrobe_0));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT3 #(
+    .INIT(8'h80)) 
+    Sl1_Ready_INST_0
+       (.I0(Sl_Rdy),
+        .I1(lmb_as),
+        .I2(\more_than_one_lmb.ongoing_Q ),
+        .O(Sl1_Ready));
+  (* SOFT_HLUTNM = "soft_lutpair3" *) 
   LUT2 #(
-    .INIT(4'h8)) 
+    .INIT(4'h2)) 
+    Sl1_Wait_INST_0
+       (.I0(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I1(\more_than_one_lmb.ongoing_Q ),
+        .O(Sl1_Wait));
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  LUT3 #(
+    .INIT(8'h08)) 
     Sl_Ready_INST_0
        (.I0(Sl_Rdy),
         .I1(lmb_as),
+        .I2(\more_than_one_lmb.ongoing_Q ),
         .O(Sl_Ready));
+  LUT3 #(
+    .INIT(8'h08)) 
+    \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q[1][0]_i_1 
+       (.I0(LMB1_AddrStrobe),
+        .I1(LMB_AddrStrobe),
+        .I2(LMB_ABus[1]),
+        .O(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][0] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[0]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [31]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][10] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[10]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [21]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][11] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[11]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [20]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][12] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[12]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [19]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][13] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[13]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [18]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][14] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[14]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [17]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][15] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[15]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [16]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][16] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[16]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [15]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][17] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[17]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [14]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][18] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[18]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [13]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][19] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[19]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [12]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][1] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[1]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [30]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][20] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[20]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [11]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][21] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[21]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [10]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][22] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[22]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [9]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][23] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[23]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [8]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][24] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[24]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [7]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][25] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[25]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [6]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][26] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[26]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [5]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][27] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[27]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [4]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][28] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[28]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [3]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][29] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[29]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [2]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][2] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[2]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [29]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][30] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[30]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [1]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][31] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[31]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [0]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][3] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[3]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [28]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][4] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[4]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [27]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][5] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[5]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [26]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][6] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[6]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [25]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][7] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[7]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [24]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][8] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[8]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [23]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1][9] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_ABus[9]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1] [22]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_AddrStrobe_vec_Q_reg[1] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_AddrStrobe),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_AddrStrobe_vec_Q_reg_n_0_[1] ),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1][0] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_BE[0]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [3]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1][1] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_BE[1]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [2]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1][2] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_BE[2]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [1]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1][3] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_BE[3]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_BE_vec_Q_reg[1] [0]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][0] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[0]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [31]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][10] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[10]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [21]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][11] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[11]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [20]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][12] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[12]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [19]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][13] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[13]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [18]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][14] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[14]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [17]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][15] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[15]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [16]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][16] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[16]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [15]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][17] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[17]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [14]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][18] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[18]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [13]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][19] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[19]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [12]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][1] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[1]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [30]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][20] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[20]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [11]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][21] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[21]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [10]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][22] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[22]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [9]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][23] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[23]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [8]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][24] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[24]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [7]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][25] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[25]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [6]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][26] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[26]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [5]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][27] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[27]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [4]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][28] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[28]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [3]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][29] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[29]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [2]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][2] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[2]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [29]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][30] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[30]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [1]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][31] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[31]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [0]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][3] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[3]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [28]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][4] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[4]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [27]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][5] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[5]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [26]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][6] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[6]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [25]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][7] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[7]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [24]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][8] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[8]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [23]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1][9] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteDBus[9]),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteDBus_vec_Q_reg[1] [22]),
+        .R(LMB_Rst));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].LMB_WriteStrobe_vec_Q_reg[1] 
+       (.C(LMB_Clk),
+        .CE(\more_than_one_lmb.lmb_mux_generate[1].LMB_ABus_vec_Q_reg[1]0 ),
+        .D(LMB1_WriteStrobe),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].LMB_WriteStrobe_vec_Q_reg_n_0_[1] ),
+        .R(LMB_Rst));
+  (* SOFT_HLUTNM = "soft_lutpair0" *) 
+  LUT4 #(
+    .INIT(16'h0E00)) 
+    \more_than_one_lmb.lmb_mux_generate[1].wait_vec[1]_i_1 
+       (.I0(LMB1_AddrStrobe),
+        .I1(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I2(LMB_ABus[1]),
+        .I3(LMB_AddrStrobe),
+        .O(\more_than_one_lmb.lmb_mux_generate[1].wait_vec[1]_i_1_n_0 ));
+  FDRE \more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg[1] 
+       (.C(LMB_Clk),
+        .CE(1'b1),
+        .D(\more_than_one_lmb.lmb_mux_generate[1].wait_vec[1]_i_1_n_0 ),
+        .Q(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .R(LMB_Rst));
+  (* SOFT_HLUTNM = "soft_lutpair1" *) 
+  LUT4 #(
+    .INIT(16'hE0EE)) 
+    \more_than_one_lmb.ongoing_Q[0]_i_1 
+       (.I0(LMB1_AddrStrobe),
+        .I1(\more_than_one_lmb.lmb_mux_generate[1].wait_vec_reg_n_0_[1] ),
+        .I2(LMB_ABus[1]),
+        .I3(LMB_AddrStrobe),
+        .O(\more_than_one_lmb.ongoing_new_0 ));
+  FDRE #(
+    .INIT(1'b0)) 
+    \more_than_one_lmb.ongoing_Q_reg[0] 
+       (.C(LMB_Clk),
+        .CE(1'b1),
+        .D(\more_than_one_lmb.ongoing_new_0 ),
+        .Q(\more_than_one_lmb.ongoing_Q ),
+        .R(LMB_Rst));
 endmodule
 `ifndef GLBL
 `define GLBL

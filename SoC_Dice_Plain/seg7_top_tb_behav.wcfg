@@ -3,55 +3,58 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="ledcntrl_top_tb_behav.wdb" id="1">
+      <db_ref path="top_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="ahb3lite_pkg" />
             <top_module name="glbl" />
-            <top_module name="ledcntrl_top_tb" />
+            <top_module name="ipif_pkg" />
+            <top_module name="lmb_bram_if_funcs" />
+            <top_module name="mdm_funcs" />
+            <top_module name="tc_types" />
+            <top_module name="top_tb" />
+            <top_module name="vcomponents" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="19.900035001 ms"></ZoomEndTime>
-      <Cursor1Time time="19.900035000 ms"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,327.001 ns"></ZoomEndTime>
+      <Cursor1Time time="95.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="276"></NameColumnWidth>
-      <ValueColumnWidth column_width="112"></ValueColumnWidth>
+      <NameColumnWidth column_width="196"></NameColumnWidth>
+      <ValueColumnWidth column_width="78"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="8" />
-   <wvobject fp_name="/ledcntrl_top_tb/led_out" type="array">
-      <obj_property name="ElementShortName">led_out[15:0]</obj_property>
-      <obj_property name="ObjectShortName">led_out[15:0]</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-   </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/clk" type="logic">
+   <wvobject fp_name="/top_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/haddr" type="array">
-      <obj_property name="ElementShortName">haddr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">haddr[31:0]</obj_property>
+   <wvobject fp_name="/top_tb/btnC" type="logic">
+      <obj_property name="ElementShortName">btnC</obj_property>
+      <obj_property name="ObjectShortName">btnC</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/hwdata" type="array">
-      <obj_property name="ElementShortName">hwdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">hwdata[31:0]</obj_property>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/IReady" type="logic">
+      <obj_property name="ElementShortName">IReady</obj_property>
+      <obj_property name="ObjectShortName">IReady</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/int_out" type="logic">
-      <obj_property name="ElementShortName">int_out</obj_property>
-      <obj_property name="ObjectShortName">int_out</obj_property>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/IFetch" type="logic">
+      <obj_property name="ElementShortName">IFetch</obj_property>
+      <obj_property name="ObjectShortName">IFetch</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/dut/int_mask_ff" type="logic">
-      <obj_property name="ElementShortName">int_mask_ff</obj_property>
-      <obj_property name="ObjectShortName">int_mask_ff</obj_property>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/Instr" type="array">
+      <obj_property name="ElementShortName">Instr[0:31]</obj_property>
+      <obj_property name="ObjectShortName">Instr[0:31]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/dut/int_stat_ff" type="logic">
-      <obj_property name="ElementShortName">int_stat_ff</obj_property>
-      <obj_property name="ObjectShortName">int_stat_ff</obj_property>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/Instr_Addr" type="array">
+      <obj_property name="ElementShortName">Instr_Addr[0:31]</obj_property>
+      <obj_property name="ObjectShortName">Instr_Addr[0:31]</obj_property>
    </wvobject>
-   <wvobject fp_name="/ledcntrl_top_tb/dut/int_clr" type="logic">
-      <obj_property name="ElementShortName">int_clr</obj_property>
-      <obj_property name="ObjectShortName">int_clr</obj_property>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/Clk" type="logic">
+      <obj_property name="ElementShortName">Clk</obj_property>
+      <obj_property name="ObjectShortName">Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_tb/dut/soc_top_i/microblaze_riscv_0/Reset" type="logic">
+      <obj_property name="ElementShortName">Reset</obj_property>
+      <obj_property name="ObjectShortName">Reset</obj_property>
    </wvobject>
 </wave_config>

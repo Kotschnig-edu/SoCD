@@ -66,9 +66,6 @@ COMPONENT soc_top
     gpio_rtl_0_tri_i : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     gpio_rtl_0_tri_o : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     gpio_rtl_0_tri_t : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    pwm : OUT STD_LOGIC;
-    clk_100MHz : IN STD_LOGIC;
-    reset_n : IN STD_LOGIC;
     ahb_0_haddr : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     ahb_0_hburst : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
     ahb_0_hmastlock : OUT STD_LOGIC;
@@ -87,7 +84,10 @@ COMPONENT soc_top
     apb_1_psel : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
     apb_1_pslverr : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
     apb_1_pwdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    apb_1_pwrite : OUT STD_LOGIC
+    apb_1_pwrite : OUT STD_LOGIC;
+    pwm : OUT STD_LOGIC;
+    clk_100MHz : IN STD_LOGIC;
+    reset_n : IN STD_LOGIC
   );
 END COMPONENT;
 -- COMP_TAG_END ------  End cut for COMPONENT Declaration  ------
@@ -111,9 +111,6 @@ your_instance_name : soc_top
     gpio_rtl_0_tri_i => gpio_rtl_0_tri_i,
     gpio_rtl_0_tri_o => gpio_rtl_0_tri_o,
     gpio_rtl_0_tri_t => gpio_rtl_0_tri_t,
-    pwm => pwm,
-    clk_100MHz => clk_100MHz,
-    reset_n => reset_n,
     ahb_0_haddr => ahb_0_haddr,
     ahb_0_hburst => ahb_0_hburst,
     ahb_0_hmastlock => ahb_0_hmastlock,
@@ -132,7 +129,10 @@ your_instance_name : soc_top
     apb_1_psel => apb_1_psel,
     apb_1_pslverr => apb_1_pslverr,
     apb_1_pwdata => apb_1_pwdata,
-    apb_1_pwrite => apb_1_pwrite
+    apb_1_pwrite => apb_1_pwrite,
+    pwm => pwm,
+    clk_100MHz => clk_100MHz,
+    reset_n => reset_n
   );
 -- INST_TAG_END ------  End cut for INSTANTIATION Template  ------
 

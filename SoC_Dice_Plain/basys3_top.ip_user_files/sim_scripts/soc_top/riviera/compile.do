@@ -141,6 +141,11 @@ vcom -work axi_uartlite_v2_0_39 -93  -incr \
 
 vcom -work xil_defaultlib -93  -incr \
 "../../../bd/soc_top/ip/soc_top_axi_uartlite_0_0/sim/soc_top_axi_uartlite_0_0.vhd" \
+
+vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l microblaze_v11_0_16 -l microblaze_riscv_v1_0_7 -l xil_defaultlib -l lmb_bram_if_cntlr_v4_0_27 -l blk_mem_gen_v8_4_12 -l proc_sys_reset_v5_0_17 -l axi_lite_ipif_v3_0_4 -l mdm_riscv_v1_0_7 -l axi_intc_v4_1_22 -l axi_timer_v2_0_37 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_37 -l axi_uartlite_v2_0_39 -l smartconnect_v1_0 -l axi_infrastructure_v1_1_0 -l axi_register_slice_v2_1_36 -l axi_vip_v1_1_22 -l axi_apb_bridge_v3_0_21 -l xlconstant_v1_1_10 -l xlconcat_v2_1_7 -l axi_ahblite_bridge_v3_0_31 -l generic_baseblocks_v2_1_2 -l fifo_generator_v13_2_14 -l axi_data_fifo_v2_1_36 -l axi_protocol_converter_v2_1_37 \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
+
+vcom -work xil_defaultlib -93  -incr \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_1/sim/bd_35fe_psr_aclk_0.vhd" \
 
 vlog -work smartconnect_v1_0  -incr "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l microblaze_v11_0_16 -l microblaze_riscv_v1_0_7 -l xil_defaultlib -l lmb_bram_if_cntlr_v4_0_27 -l blk_mem_gen_v8_4_12 -l proc_sys_reset_v5_0_17 -l axi_lite_ipif_v3_0_4 -l mdm_riscv_v1_0_7 -l axi_intc_v4_1_22 -l axi_timer_v2_0_37 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_37 -l axi_uartlite_v2_0_39 -l smartconnect_v1_0 -l axi_infrastructure_v1_1_0 -l axi_register_slice_v2_1_36 -l axi_vip_v1_1_22 -l axi_apb_bridge_v3_0_21 -l xlconstant_v1_1_10 -l xlconcat_v2_1_7 -l axi_ahblite_bridge_v3_0_31 -l generic_baseblocks_v2_1_2 -l fifo_generator_v13_2_14 -l axi_data_fifo_v2_1_36 -l axi_protocol_converter_v2_1_37 \
@@ -250,9 +255,6 @@ vlog -work xil_defaultlib  -incr "+incdir+../../../../basys3_top.gen/sources_1/b
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_66/sim/bd_35fe_m05bn_0.sv" \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_67/sim/bd_35fe_m05e_0.sv" \
 
-vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l microblaze_v11_0_16 -l microblaze_riscv_v1_0_7 -l xil_defaultlib -l lmb_bram_if_cntlr_v4_0_27 -l blk_mem_gen_v8_4_12 -l proc_sys_reset_v5_0_17 -l axi_lite_ipif_v3_0_4 -l mdm_riscv_v1_0_7 -l axi_intc_v4_1_22 -l axi_timer_v2_0_37 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_37 -l axi_uartlite_v2_0_39 -l smartconnect_v1_0 -l axi_infrastructure_v1_1_0 -l axi_register_slice_v2_1_36 -l axi_vip_v1_1_22 -l axi_apb_bridge_v3_0_21 -l xlconstant_v1_1_10 -l xlconcat_v2_1_7 -l axi_ahblite_bridge_v3_0_31 -l generic_baseblocks_v2_1_2 -l fifo_generator_v13_2_14 -l axi_data_fifo_v2_1_36 -l axi_protocol_converter_v2_1_37 \
-"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
-
 vcom -work smartconnect_v1_0 -93  -incr \
 "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/cb42/hdl/sc_ultralite_v1_0_rfs.vhd" \
 
@@ -289,7 +291,6 @@ vlog -work xlconcat_v2_1_7  -incr -v2k5 "+incdir+../../../../basys3_top.gen/sour
 
 vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l microblaze_v11_0_16 -l microblaze_riscv_v1_0_7 -l xil_defaultlib -l lmb_bram_if_cntlr_v4_0_27 -l blk_mem_gen_v8_4_12 -l proc_sys_reset_v5_0_17 -l axi_lite_ipif_v3_0_4 -l mdm_riscv_v1_0_7 -l axi_intc_v4_1_22 -l axi_timer_v2_0_37 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_37 -l axi_uartlite_v2_0_39 -l smartconnect_v1_0 -l axi_infrastructure_v1_1_0 -l axi_register_slice_v2_1_36 -l axi_vip_v1_1_22 -l axi_apb_bridge_v3_0_21 -l xlconstant_v1_1_10 -l xlconcat_v2_1_7 -l axi_ahblite_bridge_v3_0_31 -l generic_baseblocks_v2_1_2 -l fifo_generator_v13_2_14 -l axi_data_fifo_v2_1_36 -l axi_protocol_converter_v2_1_37 \
 "../../../bd/soc_top/ip/soc_top_xlconcat_0_0/sim/soc_top_xlconcat_0_0.v" \
-"../../../bd/soc_top/sim/soc_top.v" \
 
 vcom -work axi_ahblite_bridge_v3_0_31 -93  -incr \
 "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/9d50/hdl/axi_ahblite_bridge_v3_0_vh_rfs.vhd" \
@@ -317,6 +318,7 @@ vlog -work axi_protocol_converter_v2_1_37  -incr -v2k5 "+incdir+../../../../basy
 
 vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l microblaze_v11_0_16 -l microblaze_riscv_v1_0_7 -l xil_defaultlib -l lmb_bram_if_cntlr_v4_0_27 -l blk_mem_gen_v8_4_12 -l proc_sys_reset_v5_0_17 -l axi_lite_ipif_v3_0_4 -l mdm_riscv_v1_0_7 -l axi_intc_v4_1_22 -l axi_timer_v2_0_37 -l interrupt_control_v3_1_5 -l axi_gpio_v2_0_37 -l axi_uartlite_v2_0_39 -l smartconnect_v1_0 -l axi_infrastructure_v1_1_0 -l axi_register_slice_v2_1_36 -l axi_vip_v1_1_22 -l axi_apb_bridge_v3_0_21 -l xlconstant_v1_1_10 -l xlconcat_v2_1_7 -l axi_ahblite_bridge_v3_0_31 -l generic_baseblocks_v2_1_2 -l fifo_generator_v13_2_14 -l axi_data_fifo_v2_1_36 -l axi_protocol_converter_v2_1_37 \
 "../../../bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
+"../../../bd/soc_top/sim/soc_top.v" \
 
 vlog -work xil_defaultlib \
 "glbl.v"

@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Wed Oct 28 11:43:29 2026
+//Date        : Wed Nov 11 10:52:02 2026
 //Host        : R02280 running 64-bit major release  (build 9200)
 //Command     : generate_target soc_top.bd
 //Design      : soc_top
@@ -275,6 +275,14 @@ module soc_top
   wire microblaze_riscv_0_DLMB_WAIT;
   wire [0:31]microblaze_riscv_0_DLMB_WRITEDBUS;
   wire microblaze_riscv_0_DLMB_WRITESTROBE;
+  wire [0:31]microblaze_riscv_0_ILMB_ABUS;
+  wire microblaze_riscv_0_ILMB_ADDRSTROBE;
+  wire microblaze_riscv_0_ILMB_CE;
+  wire [0:31]microblaze_riscv_0_ILMB_READDBUS;
+  wire microblaze_riscv_0_ILMB_READSTROBE;
+  wire microblaze_riscv_0_ILMB_READY;
+  wire microblaze_riscv_0_ILMB_UE;
+  wire microblaze_riscv_0_ILMB_WAIT;
   wire [31:0]microblaze_riscv_0_M_AXI_DP_ARADDR;
   wire [2:0]microblaze_riscv_0_M_AXI_DP_ARPROT;
   wire microblaze_riscv_0_M_AXI_DP_ARREADY;
@@ -672,6 +680,12 @@ module soc_top
         .BRAM_EN_A(lmb_bram_if_cntlr_0_BRAM_PORT_EN),
         .BRAM_Rst_A(lmb_bram_if_cntlr_0_BRAM_PORT_RST),
         .BRAM_WEN_A(lmb_bram_if_cntlr_0_BRAM_PORT_WE),
+        .LMB1_ABus(microblaze_riscv_0_ILMB_ABUS),
+        .LMB1_AddrStrobe(microblaze_riscv_0_ILMB_ADDRSTROBE),
+        .LMB1_BE({1'b0,1'b0,1'b0,1'b0}),
+        .LMB1_ReadStrobe(microblaze_riscv_0_ILMB_READSTROBE),
+        .LMB1_WriteDBus({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .LMB1_WriteStrobe(1'b0),
         .LMB_ABus(microblaze_riscv_0_DLMB_ABUS),
         .LMB_AddrStrobe(microblaze_riscv_0_DLMB_ADDRSTROBE),
         .LMB_BE(microblaze_riscv_0_DLMB_BE),
@@ -680,6 +694,11 @@ module soc_top
         .LMB_Rst(proc_sys_reset_0_mb_reset),
         .LMB_WriteDBus(microblaze_riscv_0_DLMB_WRITEDBUS),
         .LMB_WriteStrobe(microblaze_riscv_0_DLMB_WRITESTROBE),
+        .Sl1_CE(microblaze_riscv_0_ILMB_CE),
+        .Sl1_DBus(microblaze_riscv_0_ILMB_READDBUS),
+        .Sl1_Ready(microblaze_riscv_0_ILMB_READY),
+        .Sl1_UE(microblaze_riscv_0_ILMB_UE),
+        .Sl1_Wait(microblaze_riscv_0_ILMB_WAIT),
         .Sl_CE(microblaze_riscv_0_DLMB_CE),
         .Sl_DBus(microblaze_riscv_0_DLMB_READDBUS),
         .Sl_Ready(microblaze_riscv_0_DLMB_READY),
@@ -720,11 +739,14 @@ module soc_top
         .Dbg_Trig_Out({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .Dbg_Update(mdm_riscv_0_MBDEBUG_0_UPDATE),
         .Debug_Rst(mdm_riscv_0_MBDEBUG_0_RST),
-        .ICE(1'b0),
-        .IReady(1'b0),
-        .IUE(1'b0),
-        .IWAIT(1'b0),
-        .Instr({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .ICE(microblaze_riscv_0_ILMB_CE),
+        .IFetch(microblaze_riscv_0_ILMB_READSTROBE),
+        .IReady(microblaze_riscv_0_ILMB_READY),
+        .IUE(microblaze_riscv_0_ILMB_UE),
+        .IWAIT(microblaze_riscv_0_ILMB_WAIT),
+        .I_AS(microblaze_riscv_0_ILMB_ADDRSTROBE),
+        .Instr(microblaze_riscv_0_ILMB_READDBUS),
+        .Instr_Addr(microblaze_riscv_0_ILMB_ABUS),
         .Interrupt(axi_intc_0_interrupt_INTERRUPT),
         .Interrupt_Address({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .M_AXI_DP_ARADDR(microblaze_riscv_0_M_AXI_DP_ARADDR),

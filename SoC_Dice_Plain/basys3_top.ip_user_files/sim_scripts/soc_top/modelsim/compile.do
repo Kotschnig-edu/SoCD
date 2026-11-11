@@ -138,6 +138,11 @@ vcom -work axi_uartlite_v2_0_39  -93  \
 
 vcom -work xil_defaultlib  -93  \
 "../../../bd/soc_top/ip/soc_top_axi_uartlite_0_0/sim/soc_top_axi_uartlite_0_0.vhd" \
+
+vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
+"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
+
+vcom -work xil_defaultlib  -93  \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_1/sim/bd_35fe_psr_aclk_0.vhd" \
 
 vlog -work smartconnect_v1_0  -incr -mfcu  -sv -L smartconnect_v1_0 -L axi_vip_v1_1_22 -L xilinx_vip "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
@@ -247,9 +252,6 @@ vlog -work xil_defaultlib  -incr -mfcu  -sv -L smartconnect_v1_0 -L axi_vip_v1_1
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_66/sim/bd_35fe_m05bn_0.sv" \
 "../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_67/sim/bd_35fe_m05e_0.sv" \
 
-vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
-"../../../bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
-
 vcom -work smartconnect_v1_0  -93  \
 "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/cb42/hdl/sc_ultralite_v1_0_rfs.vhd" \
 
@@ -286,7 +288,6 @@ vlog -work xlconcat_v2_1_7  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sou
 
 vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../bd/soc_top/ip/soc_top_xlconcat_0_0/sim/soc_top_xlconcat_0_0.v" \
-"../../../bd/soc_top/sim/soc_top.v" \
 
 vcom -work axi_ahblite_bridge_v3_0_31  -93  \
 "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/9d50/hdl/axi_ahblite_bridge_v3_0_vh_rfs.vhd" \
@@ -314,6 +315,7 @@ vlog -work axi_protocol_converter_v2_1_37  -incr -mfcu  "+incdir+../../../../bas
 
 vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
+"../../../bd/soc_top/sim/soc_top.v" \
 
 vlog -work xil_defaultlib \
 "glbl.v"

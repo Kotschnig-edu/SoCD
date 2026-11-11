@@ -2,8 +2,8 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
--- Date        : Wed Nov  4 10:53:02 2026
--- Host        : R02738 running 64-bit major release  (build 9200)
+-- Date        : Wed Nov 11 11:14:44 2026
+-- Host        : R02280 running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               c:/SoCD/SoC_Dice_Plain/basys3_top.gen/sources_1/bd/soc_top/ip/soc_top_axi_smc_0/soc_top_axi_smc_0_stub.vhdl
 -- Design      : soc_top_axi_smc_0
@@ -302,7 +302,7 @@ architecture stub of soc_top_axi_smc_0 is
   attribute X_INTERFACE_INFO of M04_AXI_rready : signal is "xilinx.com:interface:aximm:1.0 M04_AXI RREADY";
   attribute X_INTERFACE_INFO of M05_AXI_awaddr : signal is "xilinx.com:interface:aximm:1.0 M05_AXI AWADDR";
   attribute X_INTERFACE_MODE of M05_AXI_awaddr : signal is "master";
-  attribute X_INTERFACE_PARAMETER of M05_AXI_awaddr : signal is "XIL_INTERFACENAME M05_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 256, PHASE 0.0, CLK_DOMAIN soc_top_clk_100MHz, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0";
+  attribute X_INTERFACE_PARAMETER of M05_AXI_awaddr : signal is "XIL_INTERFACENAME M05_AXI, DATA_WIDTH 32, PROTOCOL AXI4LITE, FREQ_HZ 100000000, ID_WIDTH 0, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 1, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 1, NUM_WRITE_OUTSTANDING 1, MAX_BURST_LENGTH 1, PHASE 0.0, CLK_DOMAIN soc_top_clk_100MHz, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0";
   attribute X_INTERFACE_INFO of M05_AXI_awprot : signal is "xilinx.com:interface:aximm:1.0 M05_AXI AWPROT";
   attribute X_INTERFACE_INFO of M05_AXI_awvalid : signal is "xilinx.com:interface:aximm:1.0 M05_AXI AWVALID";
   attribute X_INTERFACE_INFO of M05_AXI_awready : signal is "xilinx.com:interface:aximm:1.0 M05_AXI AWREADY";

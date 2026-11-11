@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x252620BB2B133B",
+      "boundary_crc": "0x2526201F88CF27",
       "design_src": "SBD",
       "device": "xc7a35tcpg236-2",
       "name": "bd_35fe",
@@ -341,8 +341,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "1",
-            "value_src": "default"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"
@@ -376,8 +375,7 @@
             "value_src": "default"
           },
           "SUPPORTS_NARROW_BURST": {
-            "value": "0",
-            "value_src": "default"
+            "value": "0"
           },
           "WUSER_BITS_PER_BYTE": {
             "value": "0"
@@ -473,8 +471,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "1",
-            "value_src": "default"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"
@@ -508,8 +505,7 @@
             "value_src": "default"
           },
           "SUPPORTS_NARROW_BURST": {
-            "value": "0",
-            "value_src": "default"
+            "value": "0"
           },
           "WUSER_BITS_PER_BYTE": {
             "value": "0"
@@ -605,8 +601,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "1",
-            "value_src": "default"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"
@@ -640,8 +635,7 @@
             "value_src": "default"
           },
           "SUPPORTS_NARROW_BURST": {
-            "value": "0",
-            "value_src": "default"
+            "value": "0"
           },
           "WUSER_BITS_PER_BYTE": {
             "value": "0"
@@ -737,8 +731,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "1",
-            "value_src": "default"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"
@@ -772,8 +765,7 @@
             "value_src": "default"
           },
           "SUPPORTS_NARROW_BURST": {
-            "value": "0",
-            "value_src": "default"
+            "value": "0"
           },
           "WUSER_BITS_PER_BYTE": {
             "value": "0"
@@ -869,8 +861,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "1",
-            "value_src": "default"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"
@@ -904,8 +895,7 @@
             "value_src": "default"
           },
           "SUPPORTS_NARROW_BURST": {
-            "value": "0",
-            "value_src": "default"
+            "value": "0"
           },
           "WUSER_BITS_PER_BYTE": {
             "value": "0"
@@ -1001,7 +991,7 @@
             "value_src": "default"
           },
           "MAX_BURST_LENGTH": {
-            "value": "256"
+            "value": "1"
           },
           "NUM_READ_OUTSTANDING": {
             "value": "1"

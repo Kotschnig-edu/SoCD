@@ -1072,7 +1072,7 @@ BEGIN
       C_USE_SSTC => 1,
       C_USE_BRANCH_TARGET_CACHE => 0,
       C_BRANCH_TARGET_CACHE_SIZE => 0,
-      C_PC_WIDTH => 32,
+      C_PC_WIDTH => 17,
       C_DEBUG_ENABLED => 1,
       C_DEBUG_INTERFACE => 0,
       C_DEBUG_NUM_PROGBUF => 2,

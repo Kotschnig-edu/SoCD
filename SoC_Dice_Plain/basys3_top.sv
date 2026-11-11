@@ -98,12 +98,15 @@ module basys3_top(
     .dout_pls_o(deb_dout_pls ), // O; Debounced output pulse 
     .dout_o    (deb_dout     )  // O; Debounced data out
   );
-    
 
-  assign led = sw;
-
-    
   // SoC
+  wire [31:0]ahb_0_haddr;
+  wire [31:0]ahb_0_hrdata;
+  wire ahb_0_hready;
+  wire ahb_0_hresp;
+  wire [1:0]ahb_0_htrans;
+  wire [31:0]ahb_0_hwdata;
+  wire ahb_0_hwrite;
   wire [31:0]apb_0_paddr;
   wire apb_0_penable;
   wire [31:0]apb_0_prdata;
@@ -122,7 +125,7 @@ module basys3_top(
   wire apb_1_pwrite;
   logic pwm;
   
-  assign apb_1_prdata  = 32'h0101_0101;
+  assign apb_1_prdata  = 32'ha5a5_5a5a;
   assign apb_1_pready  = 1'b1;
   assign apb_1_pslverr = 1'b0; 
 
@@ -144,11 +147,39 @@ module basys3_top(
     // Seven Segment Display Outputs
     .seg7_seg   (seg), // O; Segment  
     .seg7_an    (an ), // O; Anode of Seg0 ..3
-    .seg7_dp    (dp )  // O; Anode of decimal point  
+    .seg7_dp    (dp )  // O; Anode of decimal point
   );
 
-  
+  ledcntrl_top u_ledcntrl_top(
+    .clk       (clk         ),
+    .reset_n   (rst_n       ),
+
+    .haddr     (ahb_0_haddr ),
+    .hwrite    (ahb_0_hwrite),
+    .htrans    (ahb_0_htrans),
+    .hwdata    (ahb_0_hwdata),
+    .hrdata    (ahb_0_hrdata),
+    .hready    (ahb_0_hready), // only subordinate: HREADY = own HREADYOUT
+    .hready_out(ahb_0_hready),
+    .hresp     (ahb_0_hresp ),
+
+    .int_out   (            ), // O; Interrupt (not connected)
+    .led_out   (led         )  // O; LED outputs
+  );
+
+
   soc_top soc_top_i (
+        .ahb_0_haddr    (ahb_0_haddr ),
+        .ahb_0_hburst   (),
+        .ahb_0_hmastlock(),
+        .ahb_0_hprot    (),
+        .ahb_0_hrdata   (ahb_0_hrdata),
+        .ahb_0_hready   (ahb_0_hready),
+        .ahb_0_hresp    (ahb_0_hresp ),
+        .ahb_0_hsize    (),
+        .ahb_0_htrans   (ahb_0_htrans),
+        .ahb_0_hwdata   (ahb_0_hwdata),
+        .ahb_0_hwrite   (ahb_0_hwrite),
         .apb_0_paddr  (apb_0_paddr  ),
         .apb_0_penable(apb_0_penable),
         .apb_0_prdata (apb_0_prdata ),

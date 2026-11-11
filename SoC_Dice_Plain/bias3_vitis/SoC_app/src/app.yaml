@@ -1,0 +1,4 @@
+domain_path: C:\SoCD\SoC_Dice_Plain\bias3_vitis\SoC_DUT\export\SoC_DUT\sw\standalone_microblaze_riscv_0
+app_src_dir: C:\AMDDesignTools\2025.2\Vitis\data\embeddedsw\lib\sw_apps\empty_application
+template: empty_application
+lang: c

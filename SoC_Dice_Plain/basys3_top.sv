@@ -60,9 +60,8 @@ module basys3_top(
   logic [7:0] deb_dout;
   logic [7:0] deb_dout_pls;
 
-  // Lab 05: GPIO <-> switches / LEDs
+  // Lab 06: GPIO = inputs only (switches + buttons), LEDs from the LED controller
   logic [7:0]  sw_deb;        // Debounced switches 7..0
-  logic [31:0] gpio_o;        // GPIO output of the SoC
   logic [15:0] ledcntrl_led;  // LED output of the AHB LED controller
             
    
@@ -157,7 +156,7 @@ module basys3_top(
     .clk  (clk  ),
     .rst_n(rst_n),
   
-    .paddr  (apb_0_paddr  ),
+    .paddr  (apb_0_paddr[11:0]), // only the 4 KB register window is decoded
     .penable(apb_0_penable),
     .psel   (apb_0_psel   ),
     .pwrite (apb_0_pwrite ),
@@ -189,9 +188,8 @@ module basys3_top(
     .led_out   (ledcntrl_led)  // O; LED outputs
   );
 
-  // Lab 05: LED[7:0] from GPIO output, LED[15:8] stay with the LED controller
-  assign led[7:0]  = gpio_o[7:0];
-  assign led[15:8] = ledcntrl_led[15:8];
+  // Lab 06: all 16 LEDs are driven by the AHB LED controller
+  assign led = ledcntrl_led;
 
 
   soc_top soc_top_i (
@@ -223,8 +221,9 @@ module basys3_top(
         .apb_1_pwdata (apb_1_pwdata ),
         .apb_1_pwrite (apb_1_pwrite ),
         .clk_100MHz   (clk),
-        .gpio_rtl_0_tri_i ({16'h0000, sw_deb, 8'h00}), // switches on bits [15:8]
-        .gpio_rtl_0_tri_o (gpio_o),
+        // GPIO inputs: [15:8] = switches 7..0, [16] = btnU, [17] = btnD (debounced)
+        .gpio_rtl_0_tri_i ({14'h0000, deb_dout[1:0], sw_deb, 8'h00}),
+        .gpio_rtl_0_tri_o (),
         .gpio_rtl_0_tri_t (),
         .pwm          (pwm),
         .reset_n      (rst_n),

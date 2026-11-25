@@ -60,7 +60,7 @@ module basys3_top(
   logic [7:0] deb_dout;
   logic [7:0] deb_dout_pls;
 
-  // Lab 06: GPIO = inputs only (switches + buttons), LEDs from the LED controller
+  // Lab 06: GPIO = switch inputs only, LEDs from the LED controller
   logic [7:0]  sw_deb;        // Debounced switches 7..0
   logic [15:0] ledcntrl_led;  // LED output of the AHB LED controller
             
@@ -221,8 +221,7 @@ module basys3_top(
         .apb_1_pwdata (apb_1_pwdata ),
         .apb_1_pwrite (apb_1_pwrite ),
         .clk_100MHz   (clk),
-        // GPIO inputs: [15:8] = switches 7..0, [16] = btnU, [17] = btnD (debounced)
-        .gpio_rtl_0_tri_i ({14'h0000, deb_dout[1:0], sw_deb, 8'h00}),
+        .gpio_rtl_0_tri_i ({16'h0000, sw_deb, 8'h00}), // switches on bits [15:8]
         .gpio_rtl_0_tri_o (),
         .gpio_rtl_0_tri_t (),
         .pwm          (pwm),

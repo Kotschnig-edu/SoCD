@@ -56,10 +56,17 @@ int main(void)
         for(int counter = 0; counter < 255; counter = counter + 25)
         {
         u32 rnd = random_next() % 10000;
-
+        seg7_show(0000);                       /* random number on display */
+        led_dim(0x0000BEEF, (u8)(255));
+        seg7_show(1111);                       /* random number on display */
+        led_dim(0x00000000, (u8)(00));
+        seg7_show(1234);                       /* random number on display */
+        led_dim(0x0000DEAd, (u8)(127));
+        seg7_show(9999);                       /* random number on display */
+        led_dim(0x0000FAB1, (u8)(128));
         seg7_show(rnd);                       /* random number on display */
         led_dim(0x0000FFFF, (u8)(counter));  /* LED brightness follows it */
-        sleep(2);
+        usleep(10000);
         }
     }
 }

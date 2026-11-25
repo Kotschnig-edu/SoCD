@@ -76,10 +76,10 @@ verilog xil_defaultlib -i "../../../../../../AMDDesignTools/2025.2/Vivado/data/r
 "../../../bd/soc_top/ip/soc_top_xlconstant_1_0/sim/soc_top_xlconstant_1_0.v" \
 "../../../bd/soc_top/ip/soc_top_xlconcat_0_0/sim/soc_top_xlconcat_0_0.v" \
 "../../../bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
-"../../../bd/soc_top/sim/soc_top.v" \
-"../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_eb4f_ila_lib_0.v" \
 "../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/sim/bd_eb4f.v" \
+"../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_eb4f_ila_lib_0.v" \
 "../../../bd/soc_top/ip/soc_top_system_ila_0_0/sim/soc_top_system_ila_0_0.v" \
+"../../../bd/soc_top/sim/soc_top.v" \
 
 verilog xil_defaultlib "glbl.v"
 

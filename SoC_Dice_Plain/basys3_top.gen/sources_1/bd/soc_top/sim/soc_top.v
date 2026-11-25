@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Wed Nov 25 13:55:27 2026
+//Date        : Wed Nov 25 16:17:02 2026
 //Host        : R02738 running 64-bit major release  (build 9200)
 //Command     : generate_target soc_top.bd
 //Design      : soc_top
@@ -40,9 +40,8 @@ module soc_top
     apb_1_pwdata,
     apb_1_pwrite,
     clk_100MHz,
+    gpio2_rtl_0_tri_i,
     gpio_rtl_0_tri_i,
-    gpio_rtl_0_tri_o,
-    gpio_rtl_0_tri_t,
     pwm,
     reset_n,
     uart_rxd,
@@ -75,9 +74,8 @@ module soc_top
   (* X_INTERFACE_INFO = "xilinx.com:interface:apb:1.0 apb_1 PWDATA" *) output [31:0]apb_1_pwdata;
   (* X_INTERFACE_INFO = "xilinx.com:interface:apb:1.0 apb_1 PWRITE" *) output apb_1_pwrite;
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK_100MHZ CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN soc_top_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0" *) input clk_100MHz;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio2_rtl_0 TRI_I" *) (* X_INTERFACE_MODE = "Master" *) input [4:0]gpio2_rtl_0_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_I" *) (* X_INTERFACE_MODE = "Master" *) input [31:0]gpio_rtl_0_tri_i;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_O" *) output [31:0]gpio_rtl_0_tri_o;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_T" *) output [31:0]gpio_rtl_0_tri_t;
   output pwm;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET_N RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET_N, INSERT_VIP 0, POLARITY ACTIVE_LOW" *) input reset_n;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart RxD" *) (* X_INTERFACE_MODE = "Master" *) input uart_rxd;
@@ -244,9 +242,8 @@ module soc_top
   wire axi_timer_0_interrupt;
   wire axi_uartlite_0_interrupt;
   wire clk_100MHz_1;
+  wire [4:0]gpio2_rtl_0_tri_i;
   wire [31:0]gpio_rtl_0_tri_i;
-  wire [31:0]gpio_rtl_0_tri_o;
-  wire [31:0]gpio_rtl_0_tri_t;
   wire [0:31]lmb_bram_if_cntlr_0_BRAM_PORT_ADDR;
   wire lmb_bram_if_cntlr_0_BRAM_PORT_CLK;
   wire [0:31]lmb_bram_if_cntlr_0_BRAM_PORT_DIN;
@@ -412,9 +409,8 @@ module soc_top
         .s_axi_wready(axi_smc_M04_AXI_WREADY),
         .s_axi_wvalid(axi_smc_M04_AXI_WVALID));
   soc_top_axi_gpio_0_0 axi_gpio_0
-       (.gpio_io_i(gpio_rtl_0_tri_i),
-        .gpio_io_o(gpio_rtl_0_tri_o),
-        .gpio_io_t(gpio_rtl_0_tri_t),
+       (.gpio2_io_i(gpio2_rtl_0_tri_i),
+        .gpio_io_i(gpio_rtl_0_tri_i),
         .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M00_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),

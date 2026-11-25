@@ -64,8 +64,6 @@ COMPONENT soc_top
     uart_rxd : IN STD_LOGIC;
     uart_txd : OUT STD_LOGIC;
     gpio_rtl_0_tri_i : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-    gpio_rtl_0_tri_o : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-    gpio_rtl_0_tri_t : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     ahb_0_haddr : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     ahb_0_hburst : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
     ahb_0_hmastlock : OUT STD_LOGIC;
@@ -87,7 +85,8 @@ COMPONENT soc_top
     apb_1_pwrite : OUT STD_LOGIC;
     pwm : OUT STD_LOGIC;
     clk_100MHz : IN STD_LOGIC;
-    reset_n : IN STD_LOGIC
+    reset_n : IN STD_LOGIC;
+    gpio2_rtl_0_tri_i : IN STD_LOGIC_VECTOR(4 DOWNTO 0)
   );
 END COMPONENT;
 -- COMP_TAG_END ------  End cut for COMPONENT Declaration  ------
@@ -109,8 +108,6 @@ your_instance_name : soc_top
     uart_rxd => uart_rxd,
     uart_txd => uart_txd,
     gpio_rtl_0_tri_i => gpio_rtl_0_tri_i,
-    gpio_rtl_0_tri_o => gpio_rtl_0_tri_o,
-    gpio_rtl_0_tri_t => gpio_rtl_0_tri_t,
     ahb_0_haddr => ahb_0_haddr,
     ahb_0_hburst => ahb_0_hburst,
     ahb_0_hmastlock => ahb_0_hmastlock,
@@ -132,7 +129,8 @@ your_instance_name : soc_top
     apb_1_pwrite => apb_1_pwrite,
     pwm => pwm,
     clk_100MHz => clk_100MHz,
-    reset_n => reset_n
+    reset_n => reset_n,
+    gpio2_rtl_0_tri_i => gpio2_rtl_0_tri_i
   );
 -- INST_TAG_END ------  End cut for INSTANTIATION Template  ------
 

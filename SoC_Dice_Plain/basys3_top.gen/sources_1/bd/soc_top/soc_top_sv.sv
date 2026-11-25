@@ -76,10 +76,6 @@ module soc_top_sv (
   (* X_INTERFACE_IGNORE = "true" *)
   input wire [31:0] gpio_rtl_0_tri_i,
   (* X_INTERFACE_IGNORE = "true" *)
-  output wire [31:0] gpio_rtl_0_tri_o,
-  (* X_INTERFACE_IGNORE = "true" *)
-  output wire [31:0] gpio_rtl_0_tri_t,
-  (* X_INTERFACE_IGNORE = "true" *)
   output wire [31:0] ahb_0_haddr,
   (* X_INTERFACE_IGNORE = "true" *)
   output wire [2:0] ahb_0_hburst,
@@ -122,7 +118,9 @@ module soc_top_sv (
   (* X_INTERFACE_IGNORE = "true" *)
   input wire clk_100MHz,
   (* X_INTERFACE_IGNORE = "true" *)
-  input wire reset_n
+  input wire reset_n,
+  (* X_INTERFACE_IGNORE = "true" *)
+  input wire [4:0] gpio2_rtl_0_tri_i
 );
 
   soc_top inst (
@@ -137,8 +135,6 @@ module soc_top_sv (
     .uart_rxd(uart_rxd),
     .uart_txd(uart_txd),
     .gpio_rtl_0_tri_i(gpio_rtl_0_tri_i),
-    .gpio_rtl_0_tri_o(gpio_rtl_0_tri_o),
-    .gpio_rtl_0_tri_t(gpio_rtl_0_tri_t),
     .ahb_0_haddr(ahb_0_haddr),
     .ahb_0_hburst(ahb_0_hburst),
     .ahb_0_hmastlock(ahb_0_hmastlock),
@@ -160,7 +156,8 @@ module soc_top_sv (
     .apb_1_pwrite(apb_1_pwrite),
     .pwm(pwm),
     .clk_100MHz(clk_100MHz),
-    .reset_n(reset_n)
+    .reset_n(reset_n),
+    .gpio2_rtl_0_tri_i(gpio2_rtl_0_tri_i)
   );
 
 endmodule

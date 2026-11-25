@@ -834,7 +834,7 @@
           },
           "HAS_PROT": {
             "value": "1",
-            "value_src": "default"
+            "value_src": "ip"
           },
           "HAS_QOS": {
             "value": "0",
@@ -850,7 +850,7 @@
           },
           "HAS_WSTRB": {
             "value": "1",
-            "value_src": "default"
+            "value_src": "ip"
           },
           "ID_WIDTH": {
             "value": "0",

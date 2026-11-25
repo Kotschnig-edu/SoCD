@@ -61,8 +61,7 @@ module basys3_top(
   logic [7:0] deb_dout_pls;
 
   // Lab 07: hardware version, read by the software via GPIO channel 1.
-  //   !!! Increment on EVERY build !!!   format 0xLLLL_BBBB: LLLL = lab, BBBB = build
-  localparam logic [31:0] HW_VERSION = 32'h0007_0001;
+  localparam logic [31:0] HW_VERSION = 32'hDEAD_BEE1;
 
   logic [7:0]  sw_deb;        // Debounced switches 7..0
   logic [4:0]  gpio2_in;      // GPIO channel 2: [4] = BTNU, [3:0] = SW3..SW0

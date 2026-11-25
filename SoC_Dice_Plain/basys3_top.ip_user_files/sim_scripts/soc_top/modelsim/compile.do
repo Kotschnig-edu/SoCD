@@ -315,10 +315,10 @@ vlog -work axi_protocol_converter_v2_1_37  -incr -mfcu  "+incdir+../../../../bas
 
 vlog -work xil_defaultlib  -incr -mfcu  "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" "+incdir+../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/5431/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/4e08/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/0568/hdl/verilog" "+incdir+../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/3556/hdl/verilog" "+incdir+C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
-"../../../bd/soc_top/sim/soc_top.v" \
-"../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_eb4f_ila_lib_0.v" \
 "../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/sim/bd_eb4f.v" \
+"../../../bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_eb4f_ila_lib_0.v" \
 "../../../bd/soc_top/ip/soc_top_system_ila_0_0/sim/soc_top_system_ila_0_0.v" \
+"../../../bd/soc_top/sim/soc_top.v" \
 
 vlog -work xil_defaultlib \
 "glbl.v"

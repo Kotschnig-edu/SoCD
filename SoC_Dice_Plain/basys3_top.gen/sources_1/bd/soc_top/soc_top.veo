@@ -65,8 +65,6 @@ soc_top your_instance_name (
   .uart_rxd(uart_rxd), // input wire uart_rxd
   .uart_txd(uart_txd), // output wire uart_txd
   .gpio_rtl_0_tri_i(gpio_rtl_0_tri_i), // input wire [31:0] gpio_rtl_0_tri_i
-  .gpio_rtl_0_tri_o(gpio_rtl_0_tri_o), // output wire [31:0] gpio_rtl_0_tri_o
-  .gpio_rtl_0_tri_t(gpio_rtl_0_tri_t), // output wire [31:0] gpio_rtl_0_tri_t
   .ahb_0_haddr(ahb_0_haddr), // output wire [31:0] ahb_0_haddr
   .ahb_0_hburst(ahb_0_hburst), // output wire [2:0] ahb_0_hburst
   .ahb_0_hmastlock(ahb_0_hmastlock), // output wire ahb_0_hmastlock
@@ -88,7 +86,8 @@ soc_top your_instance_name (
   .apb_1_pwrite(apb_1_pwrite), // output wire apb_1_pwrite
   .pwm(pwm), // output wire pwm
   .clk_100MHz(clk_100MHz), // input wire clk_100MHz
-  .reset_n(reset_n) // input wire reset_n
+  .reset_n(reset_n), // input wire reset_n
+  .gpio2_rtl_0_tri_i(gpio2_rtl_0_tri_i) // input wire [4:0] gpio2_rtl_0_tri_i
 );
 // INST_TAG_END ------  End cut for INSTANTIATION Template  ------
 

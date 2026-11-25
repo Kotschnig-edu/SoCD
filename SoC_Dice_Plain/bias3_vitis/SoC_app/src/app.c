@@ -80,7 +80,7 @@ int main(void)
     Xil_Out32(SEG7_CTL, 1);
     Xil_Out32(SEG7_VAL, 0xFFFF);               /* all digits dark */
     led_dim(0x0000FFFF, 128);
-
+    xil_printf("Version: %08x \n ",version_read());
     while (1) {
         u32 in  = Xil_In32(GPIO2_DATA);
         u32 btn = in & BTNU;

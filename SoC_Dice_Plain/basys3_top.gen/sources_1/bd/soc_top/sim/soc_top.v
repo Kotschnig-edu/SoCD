@@ -2,15 +2,15 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-//Date        : Wed Nov 11 10:52:02 2026
-//Host        : R02280 running 64-bit major release  (build 9200)
+//Date        : Wed Nov 25 13:55:27 2026
+//Host        : R02738 running 64-bit major release  (build 9200)
 //Command     : generate_target soc_top.bd
 //Design      : soc_top
 //Purpose     : IP block netlist
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "soc_top,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=soc_top,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=16,numReposBlks=16,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=3,da_bram_cntlr_cnt=1,synth_mode=Hierarchical}" *) (* HW_HANDOFF = "soc_top.hwdef" *) 
+(* CORE_GENERATION_INFO = "soc_top,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=soc_top,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=17,numReposBlks=17,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=4,da_board_cnt=3,da_bram_cntlr_cnt=1,synth_mode=None}" *) (* HW_HANDOFF = "soc_top.hwdef" *) 
 module soc_top
    (ahb_0_haddr,
     ahb_0_hburst,
@@ -83,29 +83,29 @@ module soc_top
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart RxD" *) (* X_INTERFACE_MODE = "Master" *) input uart_rxd;
   (* X_INTERFACE_INFO = "xilinx.com:interface:uart:1.0 uart TxD" *) output uart_txd;
 
-  wire [31:0]ahb_0_haddr;
-  wire [2:0]ahb_0_hburst;
-  wire ahb_0_hmastlock;
-  wire [3:0]ahb_0_hprot;
-  wire [31:0]ahb_0_hrdata;
-  wire ahb_0_hready;
-  wire ahb_0_hresp;
-  wire [2:0]ahb_0_hsize;
-  wire [1:0]ahb_0_htrans;
-  wire [31:0]ahb_0_hwdata;
-  wire ahb_0_hwrite;
-  wire [31:0]apb_0_prdata;
-  wire [0:0]apb_0_pready;
-  wire [0:0]apb_0_psel;
-  wire [0:0]apb_0_pslverr;
-  wire [31:0]apb_1_paddr;
-  wire apb_1_penable;
   wire [31:0]apb_1_prdata;
   wire [0:0]apb_1_pready;
   wire [1:1]\^apb_1_psel ;
   wire [0:0]apb_1_pslverr;
-  wire [31:0]apb_1_pwdata;
-  wire apb_1_pwrite;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HADDR" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_ahblite_bridge_0_M_AHB_HADDR;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HBURST" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [2:0]axi_ahblite_bridge_0_M_AHB_HBURST;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HMASTLOCK" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_ahblite_bridge_0_M_AHB_HMASTLOCK;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HPROT" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [3:0]axi_ahblite_bridge_0_M_AHB_HPROT;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HRDATA" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_ahblite_bridge_0_M_AHB_HRDATA;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HREADY" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_ahblite_bridge_0_M_AHB_HREADY;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HRESP" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_ahblite_bridge_0_M_AHB_HRESP;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HSIZE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [2:0]axi_ahblite_bridge_0_M_AHB_HSIZE;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HTRANS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [1:0]axi_ahblite_bridge_0_M_AHB_HTRANS;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HWDATA" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_ahblite_bridge_0_M_AHB_HWDATA;
+  (* CONN_BUS_INFO = "axi_ahblite_bridge_0_M_AHB xilinx.com:interface:ahblite:2.0 None HWRITE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_ahblite_bridge_0_M_AHB_HWRITE;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M2 xilinx.com:interface:apb:1.0 None PADDR" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_apb_bridge_0_APB_M_PADDR;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M2 xilinx.com:interface:apb:1.0 None PENABLE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_apb_bridge_0_APB_M_PENABLE;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M xilinx.com:interface:apb:1.0 None PRDATA" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_apb_bridge_0_APB_M_PRDATA;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M xilinx.com:interface:apb:1.0 None PREADY" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:0]axi_apb_bridge_0_APB_M_PREADY;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M2 xilinx.com:interface:apb:1.0 None PSEL" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:0]axi_apb_bridge_0_APB_M_PSEL;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M xilinx.com:interface:apb:1.0 None PSLVERR" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:0]axi_apb_bridge_0_APB_M_PSLVERR;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M2 xilinx.com:interface:apb:1.0 None PWDATA" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [31:0]axi_apb_bridge_0_APB_M_PWDATA;
+  (* CONN_BUS_INFO = "axi_apb_bridge_0_APB_M2 xilinx.com:interface:apb:1.0 None PWRITE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_apb_bridge_0_APB_M_PWRITE;
   wire axi_intc_0_interrupt_INTERRUPT;
   wire [31:0]axi_protocol_convert_0_M_AXI_ARADDR;
   wire [1:0]axi_protocol_convert_0_M_AXI_ARBURST;
@@ -243,7 +243,7 @@ module soc_top
   wire axi_smc_M05_AXI_WVALID;
   wire axi_timer_0_interrupt;
   wire axi_uartlite_0_interrupt;
-  wire clk_100MHz;
+  wire clk_100MHz_1;
   wire [31:0]gpio_rtl_0_tri_i;
   wire [31:0]gpio_rtl_0_tri_o;
   wire [31:0]gpio_rtl_0_tri_t;
@@ -264,25 +264,25 @@ module soc_top
   wire mdm_riscv_0_MBDEBUG_0_TDI;
   wire mdm_riscv_0_MBDEBUG_0_TDO;
   wire mdm_riscv_0_MBDEBUG_0_UPDATE;
-  wire [0:31]microblaze_riscv_0_DLMB_ABUS;
-  wire microblaze_riscv_0_DLMB_ADDRSTROBE;
-  wire [0:3]microblaze_riscv_0_DLMB_BE;
-  wire microblaze_riscv_0_DLMB_CE;
-  wire [0:31]microblaze_riscv_0_DLMB_READDBUS;
-  wire microblaze_riscv_0_DLMB_READSTROBE;
-  wire microblaze_riscv_0_DLMB_READY;
-  wire microblaze_riscv_0_DLMB_UE;
-  wire microblaze_riscv_0_DLMB_WAIT;
-  wire [0:31]microblaze_riscv_0_DLMB_WRITEDBUS;
-  wire microblaze_riscv_0_DLMB_WRITESTROBE;
-  wire [0:31]microblaze_riscv_0_ILMB_ABUS;
-  wire microblaze_riscv_0_ILMB_ADDRSTROBE;
-  wire microblaze_riscv_0_ILMB_CE;
-  wire [0:31]microblaze_riscv_0_ILMB_READDBUS;
-  wire microblaze_riscv_0_ILMB_READSTROBE;
-  wire microblaze_riscv_0_ILMB_READY;
-  wire microblaze_riscv_0_ILMB_UE;
-  wire microblaze_riscv_0_ILMB_WAIT;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD ABUS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:31]microblaze_riscv_0_DLMB_ABUS;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD ADDRSTROBE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_ADDRSTROBE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD BE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:3]microblaze_riscv_0_DLMB_BE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD CE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_CE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD READDBUS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:31]microblaze_riscv_0_DLMB_READDBUS;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD READSTROBE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_READSTROBE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD READY" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_READY;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD UE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_UE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD WAIT" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_WAIT;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD WRITEDBUS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:31]microblaze_riscv_0_DLMB_WRITEDBUS;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_DLMB xilinx.com:interface:lmb:1.0 STANDARD WRITESTROBE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_DLMB_WRITESTROBE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD ABUS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:31]microblaze_riscv_0_ILMB_ABUS;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD ADDRSTROBE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_ADDRSTROBE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD CE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_CE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD READDBUS" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:31]microblaze_riscv_0_ILMB_READDBUS;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD READSTROBE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_READSTROBE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD READY" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_READY;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD UE" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_UE;
+  (* CONN_BUS_INFO = "microblaze_riscv_0_ILMB xilinx.com:interface:lmb:1.0 STANDARD WAIT" *) (* DEBUG = "true" *) (* MARK_DEBUG *) wire microblaze_riscv_0_ILMB_WAIT;
   wire [31:0]microblaze_riscv_0_M_AXI_DP_ARADDR;
   wire [2:0]microblaze_riscv_0_M_AXI_DP_ARPROT;
   wire microblaze_riscv_0_M_AXI_DP_ARREADY;
@@ -303,7 +303,7 @@ module soc_top
   wire [3:0]microblaze_riscv_0_M_AXI_DP_WSTRB;
   wire microblaze_riscv_0_M_AXI_DP_WVALID;
   wire proc_sys_reset_0_mb_reset;
-  wire [0:0]proc_sys_reset_0_peripheral_aresetn;
+  (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:0]proc_sys_reset_0_peripheral_aresetn;
   wire [0:0]proc_sys_reset_0_peripheral_aresetn1;
   wire pwm;
   wire reset_n;
@@ -313,24 +313,44 @@ module soc_top
   wire [0:0]xlconstant_0_dout;
   wire [0:0]xlconstant_1_dout;
 
-  assign apb_0_paddr[31:0] = apb_1_paddr;
-  assign apb_0_penable = apb_1_penable;
-  assign apb_0_pwdata[31:0] = apb_1_pwdata;
-  assign apb_0_pwrite = apb_1_pwrite;
+  assign ahb_0_haddr[31:0] = axi_ahblite_bridge_0_M_AHB_HADDR;
+  assign ahb_0_hburst[2:0] = axi_ahblite_bridge_0_M_AHB_HBURST;
+  assign ahb_0_hmastlock = axi_ahblite_bridge_0_M_AHB_HMASTLOCK;
+  assign ahb_0_hprot[3:0] = axi_ahblite_bridge_0_M_AHB_HPROT;
+  assign ahb_0_hsize[2:0] = axi_ahblite_bridge_0_M_AHB_HSIZE;
+  assign ahb_0_htrans[1:0] = axi_ahblite_bridge_0_M_AHB_HTRANS;
+  assign ahb_0_hwdata[31:0] = axi_ahblite_bridge_0_M_AHB_HWDATA;
+  assign ahb_0_hwrite = axi_ahblite_bridge_0_M_AHB_HWRITE;
+  assign apb_0_paddr[31:0] = axi_apb_bridge_0_APB_M_PADDR;
+  assign apb_0_penable = axi_apb_bridge_0_APB_M_PENABLE;
+  assign apb_0_psel[0] = axi_apb_bridge_0_APB_M_PSEL;
+  assign apb_0_pwdata[31:0] = axi_apb_bridge_0_APB_M_PWDATA;
+  assign apb_0_pwrite = axi_apb_bridge_0_APB_M_PWRITE;
+  assign apb_1_paddr[31:0] = axi_apb_bridge_0_APB_M_PADDR;
+  assign apb_1_penable = axi_apb_bridge_0_APB_M_PENABLE;
   assign apb_1_psel[0] = \^apb_1_psel [1];
+  assign apb_1_pwdata[31:0] = axi_apb_bridge_0_APB_M_PWDATA;
+  assign apb_1_pwrite = axi_apb_bridge_0_APB_M_PWRITE;
+  assign axi_ahblite_bridge_0_M_AHB_HRDATA = ahb_0_hrdata[31:0];
+  assign axi_ahblite_bridge_0_M_AHB_HREADY = ahb_0_hready;
+  assign axi_ahblite_bridge_0_M_AHB_HRESP = ahb_0_hresp;
+  assign axi_apb_bridge_0_APB_M_PRDATA = apb_0_prdata[31:0];
+  assign axi_apb_bridge_0_APB_M_PREADY = apb_0_pready[0];
+  assign axi_apb_bridge_0_APB_M_PSLVERR = apb_0_pslverr[0];
+  assign clk_100MHz_1 = clk_100MHz;
   soc_top_axi_ahblite_bridge_0_0 axi_ahblite_bridge_0
-       (.m_ahb_haddr(ahb_0_haddr),
-        .m_ahb_hburst(ahb_0_hburst),
-        .m_ahb_hmastlock(ahb_0_hmastlock),
-        .m_ahb_hprot(ahb_0_hprot),
-        .m_ahb_hrdata(ahb_0_hrdata),
-        .m_ahb_hready(ahb_0_hready),
-        .m_ahb_hresp(ahb_0_hresp),
-        .m_ahb_hsize(ahb_0_hsize),
-        .m_ahb_htrans(ahb_0_htrans),
-        .m_ahb_hwdata(ahb_0_hwdata),
-        .m_ahb_hwrite(ahb_0_hwrite),
-        .s_axi_aclk(clk_100MHz),
+       (.m_ahb_haddr(axi_ahblite_bridge_0_M_AHB_HADDR),
+        .m_ahb_hburst(axi_ahblite_bridge_0_M_AHB_HBURST),
+        .m_ahb_hmastlock(axi_ahblite_bridge_0_M_AHB_HMASTLOCK),
+        .m_ahb_hprot(axi_ahblite_bridge_0_M_AHB_HPROT),
+        .m_ahb_hrdata(axi_ahblite_bridge_0_M_AHB_HRDATA),
+        .m_ahb_hready(axi_ahblite_bridge_0_M_AHB_HREADY),
+        .m_ahb_hresp(axi_ahblite_bridge_0_M_AHB_HRESP),
+        .m_ahb_hsize(axi_ahblite_bridge_0_M_AHB_HSIZE),
+        .m_ahb_htrans(axi_ahblite_bridge_0_M_AHB_HTRANS),
+        .m_ahb_hwdata(axi_ahblite_bridge_0_M_AHB_HWDATA),
+        .m_ahb_hwrite(axi_ahblite_bridge_0_M_AHB_HWRITE),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_protocol_convert_0_M_AXI_ARADDR),
         .s_axi_arburst(axi_protocol_convert_0_M_AXI_ARBURST),
         .s_axi_arcache(axi_protocol_convert_0_M_AXI_ARCACHE),
@@ -364,16 +384,16 @@ module soc_top
         .s_axi_wstrb(axi_protocol_convert_0_M_AXI_WSTRB),
         .s_axi_wvalid(axi_protocol_convert_0_M_AXI_WVALID));
   soc_top_axi_apb_bridge_0_1 axi_apb_bridge_0
-       (.m_apb_paddr(apb_1_paddr),
-        .m_apb_penable(apb_1_penable),
-        .m_apb_prdata(apb_0_prdata),
+       (.m_apb_paddr(axi_apb_bridge_0_APB_M_PADDR),
+        .m_apb_penable(axi_apb_bridge_0_APB_M_PENABLE),
+        .m_apb_prdata(axi_apb_bridge_0_APB_M_PRDATA),
         .m_apb_prdata2(apb_1_prdata),
-        .m_apb_pready({apb_1_pready,apb_0_pready}),
-        .m_apb_psel({\^apb_1_psel ,apb_0_psel}),
-        .m_apb_pslverr({apb_1_pslverr,apb_0_pslverr}),
-        .m_apb_pwdata(apb_1_pwdata),
-        .m_apb_pwrite(apb_1_pwrite),
-        .s_axi_aclk(clk_100MHz),
+        .m_apb_pready({apb_1_pready,axi_apb_bridge_0_APB_M_PREADY}),
+        .m_apb_psel({\^apb_1_psel ,axi_apb_bridge_0_APB_M_PSEL}),
+        .m_apb_pslverr({apb_1_pslverr,axi_apb_bridge_0_APB_M_PSLVERR}),
+        .m_apb_pwdata(axi_apb_bridge_0_APB_M_PWDATA),
+        .m_apb_pwrite(axi_apb_bridge_0_APB_M_PWRITE),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M04_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn1),
         .s_axi_arready(axi_smc_M04_AXI_ARREADY),
@@ -395,7 +415,7 @@ module soc_top
        (.gpio_io_i(gpio_rtl_0_tri_i),
         .gpio_io_o(gpio_rtl_0_tri_o),
         .gpio_io_t(gpio_rtl_0_tri_t),
-        .s_axi_aclk(clk_100MHz),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M00_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s_axi_arready(axi_smc_M00_AXI_ARREADY),
@@ -417,7 +437,7 @@ module soc_top
   soc_top_axi_intc_0_0 axi_intc_0
        (.intr(xlconcat_0_dout),
         .irq(axi_intc_0_interrupt_INTERRUPT),
-        .s_axi_aclk(clk_100MHz),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M01_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s_axi_arready(axi_smc_M01_AXI_ARREADY),
@@ -437,7 +457,7 @@ module soc_top
         .s_axi_wstrb(axi_smc_M01_AXI_WSTRB),
         .s_axi_wvalid(axi_smc_M01_AXI_WVALID));
   soc_top_axi_protocol_convert_0_0 axi_protocol_convert_0
-       (.aclk(clk_100MHz),
+       (.aclk(clk_100MHz_1),
         .aresetn(proc_sys_reset_0_peripheral_aresetn),
         .m_axi_araddr(axi_protocol_convert_0_M_AXI_ARADDR),
         .m_axi_arburst(axi_protocol_convert_0_M_AXI_ARBURST),
@@ -612,7 +632,7 @@ module soc_top
         .S00_AXI_wready(microblaze_riscv_0_M_AXI_DP_WREADY),
         .S00_AXI_wstrb(microblaze_riscv_0_M_AXI_DP_WSTRB),
         .S00_AXI_wvalid(microblaze_riscv_0_M_AXI_DP_WVALID),
-        .aclk(clk_100MHz),
+        .aclk(clk_100MHz_1),
         .aresetn(proc_sys_reset_0_peripheral_aresetn));
   soc_top_axi_timer_0_0 axi_timer_0
        (.capturetrig0(xlconstant_1_dout),
@@ -620,7 +640,7 @@ module soc_top
         .freeze(xlconstant_1_dout),
         .interrupt(axi_timer_0_interrupt),
         .pwm0(pwm),
-        .s_axi_aclk(clk_100MHz),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M02_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s_axi_arready(axi_smc_M02_AXI_ARREADY),
@@ -642,7 +662,7 @@ module soc_top
   soc_top_axi_uartlite_0_0 axi_uartlite_0
        (.interrupt(axi_uartlite_0_interrupt),
         .rx(uart_rxd),
-        .s_axi_aclk(clk_100MHz),
+        .s_axi_aclk(clk_100MHz_1),
         .s_axi_araddr(axi_smc_M03_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s_axi_arready(axi_smc_M03_AXI_ARREADY),
@@ -689,7 +709,7 @@ module soc_top
         .LMB_ABus(microblaze_riscv_0_DLMB_ABUS),
         .LMB_AddrStrobe(microblaze_riscv_0_DLMB_ADDRSTROBE),
         .LMB_BE(microblaze_riscv_0_DLMB_BE),
-        .LMB_Clk(clk_100MHz),
+        .LMB_Clk(clk_100MHz_1),
         .LMB_ReadStrobe(microblaze_riscv_0_DLMB_READSTROBE),
         .LMB_Rst(proc_sys_reset_0_mb_reset),
         .LMB_WriteDBus(microblaze_riscv_0_DLMB_WRITEDBUS),
@@ -719,7 +739,7 @@ module soc_top
   (* KEEP_HIERARCHY = "YES" *) 
   soc_top_microblaze_riscv_0_0 microblaze_riscv_0
        (.Byte_Enable(microblaze_riscv_0_DLMB_BE),
-        .Clk(clk_100MHz),
+        .Clk(clk_100MHz_1),
         .DCE(microblaze_riscv_0_DLMB_CE),
         .DReady(microblaze_riscv_0_DLMB_READY),
         .DUE(microblaze_riscv_0_DLMB_UE),
@@ -779,7 +799,48 @@ module soc_top
         .mb_debug_sys_rst(mdm_riscv_0_Debug_SYS_Rst),
         .mb_reset(proc_sys_reset_0_mb_reset),
         .peripheral_aresetn(proc_sys_reset_0_peripheral_aresetn1),
-        .slowest_sync_clk(clk_100MHz));
+        .slowest_sync_clk(clk_100MHz_1));
+  soc_top_system_ila_0_0 system_ila_0
+       (.SLOT_0_AHBLITE_haddr(axi_ahblite_bridge_0_M_AHB_HADDR),
+        .SLOT_0_AHBLITE_hburst(axi_ahblite_bridge_0_M_AHB_HBURST),
+        .SLOT_0_AHBLITE_hmastlock(axi_ahblite_bridge_0_M_AHB_HMASTLOCK),
+        .SLOT_0_AHBLITE_hprot(axi_ahblite_bridge_0_M_AHB_HPROT),
+        .SLOT_0_AHBLITE_hrdata(axi_ahblite_bridge_0_M_AHB_HRDATA),
+        .SLOT_0_AHBLITE_hready(axi_ahblite_bridge_0_M_AHB_HREADY),
+        .SLOT_0_AHBLITE_hresp(axi_ahblite_bridge_0_M_AHB_HRESP),
+        .SLOT_0_AHBLITE_hsize(axi_ahblite_bridge_0_M_AHB_HSIZE),
+        .SLOT_0_AHBLITE_htrans(axi_ahblite_bridge_0_M_AHB_HTRANS),
+        .SLOT_0_AHBLITE_hwdata(axi_ahblite_bridge_0_M_AHB_HWDATA),
+        .SLOT_0_AHBLITE_hwrite(axi_ahblite_bridge_0_M_AHB_HWRITE),
+        .SLOT_1_APB_paddr(axi_apb_bridge_0_APB_M_PADDR),
+        .SLOT_1_APB_penable(axi_apb_bridge_0_APB_M_PENABLE),
+        .SLOT_1_APB_prdata(axi_apb_bridge_0_APB_M_PRDATA),
+        .SLOT_1_APB_pready(axi_apb_bridge_0_APB_M_PREADY),
+        .SLOT_1_APB_psel(axi_apb_bridge_0_APB_M_PSEL),
+        .SLOT_1_APB_pslverr(axi_apb_bridge_0_APB_M_PSLVERR),
+        .SLOT_1_APB_pwdata(axi_apb_bridge_0_APB_M_PWDATA),
+        .SLOT_1_APB_pwrite(axi_apb_bridge_0_APB_M_PWRITE),
+        .SLOT_2_LMB_abus(microblaze_riscv_0_DLMB_ABUS),
+        .SLOT_2_LMB_addrstrobe(microblaze_riscv_0_DLMB_ADDRSTROBE),
+        .SLOT_2_LMB_be(microblaze_riscv_0_DLMB_BE),
+        .SLOT_2_LMB_ce(microblaze_riscv_0_DLMB_CE),
+        .SLOT_2_LMB_readdbus(microblaze_riscv_0_DLMB_READDBUS),
+        .SLOT_2_LMB_readstrobe(microblaze_riscv_0_DLMB_READSTROBE),
+        .SLOT_2_LMB_ready(microblaze_riscv_0_DLMB_READY),
+        .SLOT_2_LMB_ue(microblaze_riscv_0_DLMB_UE),
+        .SLOT_2_LMB_wait(microblaze_riscv_0_DLMB_WAIT),
+        .SLOT_2_LMB_writedbus(microblaze_riscv_0_DLMB_WRITEDBUS),
+        .SLOT_2_LMB_writestrobe(microblaze_riscv_0_DLMB_WRITESTROBE),
+        .SLOT_3_LMB_abus(microblaze_riscv_0_ILMB_ABUS),
+        .SLOT_3_LMB_addrstrobe(microblaze_riscv_0_ILMB_ADDRSTROBE),
+        .SLOT_3_LMB_ce(microblaze_riscv_0_ILMB_CE),
+        .SLOT_3_LMB_readdbus(microblaze_riscv_0_ILMB_READDBUS),
+        .SLOT_3_LMB_readstrobe(microblaze_riscv_0_ILMB_READSTROBE),
+        .SLOT_3_LMB_ready(microblaze_riscv_0_ILMB_READY),
+        .SLOT_3_LMB_ue(microblaze_riscv_0_ILMB_UE),
+        .SLOT_3_LMB_wait(microblaze_riscv_0_ILMB_WAIT),
+        .clk(clk_100MHz_1),
+        .probe0(proc_sys_reset_0_peripheral_aresetn));
   soc_top_xlconcat_0_0 xlconcat_0
        (.In0(axi_timer_0_interrupt),
         .In1(axi_uartlite_0_interrupt),

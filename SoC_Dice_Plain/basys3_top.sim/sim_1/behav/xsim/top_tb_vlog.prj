@@ -1,6 +1,7 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_blk_mem_gen_0_0/sim/soc_top_blk_mem_gen_0_0.v" \
+"../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
 
 sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_2/sim/bd_35fe_arinsw_0.sv" \
@@ -69,15 +70,13 @@ sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/dat
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_65/sim/bd_35fe_m05wn_0.sv" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_66/sim/bd_35fe_m05bn_0.sv" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/ip/ip_67/sim/bd_35fe_m05e_0.sv" \
-
-verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
-"../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/bd_0/sim/bd_35fe.v" \
-
-sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_smc_0/sim/soc_top_axi_smc_0.sv" \
 
 verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_axi_protocol_convert_0_0/sim/soc_top_axi_protocol_convert_0_0.v" \
+"../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/ip/ip_0/sim/bd_eb4f_ila_lib_0.v" \
+"../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_system_ila_0_0/bd_0/sim/bd_eb4f.v" \
+"../../../../basys3_top.ip_user_files/bd/soc_top/ip/soc_top_system_ila_0_0/sim/soc_top_system_ila_0_0.v" \
 
 sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.sv" \
@@ -93,9 +92,7 @@ verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivad
 "../../../../basys3_top.ip_user_files/bd/soc_top/sim/soc_top.v" \
 
 sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
-"../../../../basys3_top.srcs/sources_1/imports/SoC_Dice_Plain/ahb3lite_pkg.sv" \
 "../../../../basys3_top.srcs/sources_1/imports/SoC_Dice_Plain/apb_master.sv" \
-"../../../../basys3_top.srcs/sources_1/imports/SoC_Dice_Plain/ahb3lite_bfm.sv" \
 
 verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../basys3_top.gen/sources_1/bd/soc_top/hdl/soc_top_wrapper.v" \
@@ -103,6 +100,8 @@ verilog xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivad
 sv xil_defaultlib  --include "../../../../../../AMDDesignTools/2025.2/Vivado/data/rsb/busdef" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/f0b6/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/00fe/hdl/verilog" --include "../../../../basys3_top.gen/sources_1/bd/soc_top/ipshared/ec67/hdl" --include "C:/AMDDesignTools/2025.2/Vivado/data/xilinx_vip/include" \
 "../../../../ledcntrl_top.sv" \
 "../../../../seg7_top_tb.sv" \
+"../../../../basys3_top.srcs/sources_1/imports/SoC_Dice_Plain/ahb3lite_pkg.sv" \
+"../../../../basys3_top.srcs/sources_1/imports/SoC_Dice_Plain/ahb3lite_bfm.sv" \
 "../../../../ledcntrl_top_tb.sv" \
 "../../../../top_tb.sv" \
 

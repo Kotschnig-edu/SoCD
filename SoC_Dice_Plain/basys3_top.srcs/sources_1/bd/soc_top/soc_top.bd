@@ -6,7 +6,7 @@
       "gen_directory": "../../../../basys3_top.gen/sources_1/bd/soc_top",
       "name": "soc_top",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
-      "synth_flow_mode": "Hierarchical",
+      "synth_flow_mode": "None",
       "tool_version": "2025.2",
       "validated": "true"
     },
@@ -26,7 +26,8 @@
       "xlconstant_1": "",
       "xlconcat_0": "",
       "axi_ahblite_bridge_0": "",
-      "axi_protocol_convert_0": ""
+      "axi_protocol_convert_0": "",
+      "system_ila_0": ""
     },
     "interface_ports": {
       "apb_0": {
@@ -952,20 +953,110 @@
             }
           }
         }
+      },
+      "system_ila_0": {
+        "vlnv": "xilinx.com:ip:system_ila:1.1",
+        "ip_revision": "22",
+        "xci_name": "soc_top_system_ila_0_0",
+        "xci_path": "ip\\soc_top_system_ila_0_0\\soc_top_system_ila_0_0.xci",
+        "inst_hier_path": "system_ila_0",
+        "has_run_ip_tcl": "true",
+        "parameters": {
+          "C_MON_TYPE": {
+            "value": "MIX"
+          },
+          "C_NUM_MONITOR_SLOTS": {
+            "value": "4"
+          },
+          "C_NUM_OF_PROBES": {
+            "value": "1"
+          },
+          "C_PROBE0_TYPE": {
+            "value": "0"
+          },
+          "C_SLOT_0_INTF_TYPE": {
+            "value": "xilinx.com:interface:ahblite_rtl:2.0"
+          },
+          "C_SLOT_0_TYPE": {
+            "value": "0"
+          },
+          "C_SLOT_1_INTF_TYPE": {
+            "value": "xilinx.com:interface:apb_rtl:1.0"
+          },
+          "C_SLOT_1_TYPE": {
+            "value": "0"
+          },
+          "C_SLOT_2_INTF_TYPE": {
+            "value": "xilinx.com:interface:lmb_rtl:1.0"
+          },
+          "C_SLOT_2_TYPE": {
+            "value": "0"
+          },
+          "C_SLOT_3_INTF_TYPE": {
+            "value": "xilinx.com:interface:lmb_rtl:1.0"
+          },
+          "C_SLOT_3_TYPE": {
+            "value": "0"
+          }
+        },
+        "interface_ports": {
+          "SLOT_0_AHBLITE": {
+            "mode": "Monitor",
+            "monitor_type": "SlaveType",
+            "vlnv_bus_definition": "xilinx.com:interface:ahblite:2.0",
+            "vlnv": "xilinx.com:interface:ahblite_rtl:2.0"
+          },
+          "SLOT_1_APB": {
+            "mode": "Monitor",
+            "monitor_type": "SlaveType",
+            "vlnv_bus_definition": "xilinx.com:interface:apb:1.0",
+            "vlnv": "xilinx.com:interface:apb_rtl:1.0"
+          },
+          "SLOT_2_LMB": {
+            "mode": "Monitor",
+            "monitor_type": "SlaveType",
+            "vlnv_bus_definition": "xilinx.com:interface:lmb:1.0",
+            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
+          },
+          "SLOT_3_LMB": {
+            "mode": "Monitor",
+            "monitor_type": "SlaveType",
+            "vlnv_bus_definition": "xilinx.com:interface:lmb:1.0",
+            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
+          }
+        }
       }
     },
     "interface_nets": {
       "axi_ahblite_bridge_0_M_AHB": {
         "interface_ports": [
           "ahb_0",
-          "axi_ahblite_bridge_0/M_AHB"
-        ]
+          "axi_ahblite_bridge_0/M_AHB",
+          "system_ila_0/SLOT_0_AHBLITE"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
       },
       "axi_apb_bridge_0_APB_M": {
         "interface_ports": [
           "apb_0",
-          "axi_apb_bridge_0/APB_M"
-        ]
+          "axi_apb_bridge_0/APB_M",
+          "system_ila_0/SLOT_1_APB"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
       },
       "axi_apb_bridge_0_APB_M2": {
         "interface_ports": [
@@ -1048,14 +1139,32 @@
       "microblaze_riscv_0_DLMB": {
         "interface_ports": [
           "microblaze_riscv_0/DLMB",
-          "lmb_bram_if_cntlr_0/SLMB"
-        ]
+          "lmb_bram_if_cntlr_0/SLMB",
+          "system_ila_0/SLOT_2_LMB"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
       },
       "microblaze_riscv_0_ILMB": {
         "interface_ports": [
           "microblaze_riscv_0/ILMB",
-          "lmb_bram_if_cntlr_0/SLMB1"
-        ]
+          "lmb_bram_if_cntlr_0/SLMB1",
+          "system_ila_0/SLOT_3_LMB"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
       },
       "microblaze_riscv_0_M_AXI_DP": {
         "interface_ports": [
@@ -1096,7 +1205,8 @@
           "lmb_bram_if_cntlr_0/LMB_Clk",
           "axi_apb_bridge_0/s_axi_aclk",
           "axi_ahblite_bridge_0/s_axi_aclk",
-          "axi_protocol_convert_0/aclk"
+          "axi_protocol_convert_0/aclk",
+          "system_ila_0/clk"
         ]
       },
       "mdm_riscv_0_Debug_SYS_Rst": {
@@ -1120,8 +1230,17 @@
           "axi_intc_0/s_axi_aresetn",
           "axi_timer_0/s_axi_aresetn",
           "axi_uartlite_0/s_axi_aresetn",
-          "axi_protocol_convert_0/aresetn"
-        ]
+          "axi_protocol_convert_0/aresetn",
+          "system_ila_0/probe0"
+        ],
+        "hdl_attributes": {
+          "DEBUG": {
+            "value": "true"
+          },
+          "MARK_DEBUG": {
+            "value": "true"
+          }
+        }
       },
       "proc_sys_reset_0_peripheral_aresetn1": {
         "ports": [

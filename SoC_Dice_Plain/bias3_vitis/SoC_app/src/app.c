@@ -1,12 +1,15 @@
 /* ----------------------------------------------------------------------------
- *  Lab 06 - 7-segment and LED driver
+ *  Lab 07 - SoC to UART
  *    SEG7 driver @ 0x44A00000 (APB)
  *    LED  driver @ 0x44A10000 (AHB)
+ *    AXI GPIO    @ 0x40000000 (channel 1: version, channel 2: BTNU, SW3..SW0)
+ *    AXI UART    @ 0x40600000 (9600 baud)
  * ------------------------------------------------------------------------- */
 
 #include "xil_io.h"
 #include "xil_types.h"
-#include "sleep.h"
+#include "xparameters.h"
+#include "xuartlite_l.h"
 
 /* 7-segment driver (seg7_top.sv) */
 #define SEG7_CTL   0x44A00000  /* [0]    enable                        */
@@ -17,8 +20,16 @@
 #define LED_CTL    0x44A10010  /* [15:0] LED enable mask               */
 #define LED_CFG    0x44A10014  /* [7:0] duty/256, [23:8] f = 1MHz/freq */
 
+/* GPIO (dual channel) */
+#define GPIO_DATA  0x40000000  /* channel 1: HW version                */
+#define GPIO2_DATA 0x40000008  /* channel 2: [4] BTNU, [3:0] SW3..SW0  */
+#define BTNU       0x10
+
+/* UART */
+#define UART_BASE  XPAR_AXI_UARTLITE_0_BASEADDR
+
 /* 4.1 Display content: decimal number 0..9999 */
-static void seg7_show(u32 number)
+void seg7_show(u32 number)
 {
     u32 val = 0;
 
@@ -47,26 +58,51 @@ static u32 random_next(void)
     return rng_state;
 }
 
+/* Lab 07: read the HW version (GPIO channel 1) */
+u32 version_read(void)
+{
+    return Xil_In32(GPIO_DATA);
+}
+
+/* Lab 07: send a string from the SoC to the PC */
+static void uart_print(const char *s)
+{
+    while (*s) {
+        XUartLite_SendByte(UART_BASE, *s++);
+    }
+}
+
 int main(void)
 {
+    u32 btn_old = 0;
+
     Xil_Out32(SEG7_DIM, 15);
-    Xil_Out32(SEG7_CTL, 1u);
+    Xil_Out32(SEG7_CTL, 1);
+    Xil_Out32(SEG7_VAL, 0xFFFF);               /* all digits dark */
+    led_dim(0x0000FFFF, 128);
 
     while (1) {
-        for(int counter = 0; counter < 255; counter = counter + 25)
-        {
-        u32 rnd = random_next() % 10000;
-        seg7_show(0000);                       /* random number on display */
-        led_dim(0x0000BEEF, (u8)(255));
-        seg7_show(1111);                       /* random number on display */
-        led_dim(0x00000000, (u8)(00));
-        seg7_show(1234);                       /* random number on display */
-        led_dim(0x0000DEAd, (u8)(127));
-        seg7_show(9999);                       /* random number on display */
-        led_dim(0x0000FAB1, (u8)(128));
-        seg7_show(rnd);                       /* random number on display */
-        led_dim(0x0000FFFF, (u8)(counter));  /* LED brightness follows it */
-        usleep(10000);
+        u32 in  = Xil_In32(GPIO2_DATA);
+        u32 btn = in & BTNU;
+
+        random_next();                         /* button timing makes it random */
+
+        if (btn && !btn_old) {                 /* BTNU pressed */
+            u32  val    = 0xFFFF;              /* 0xF = digit dark */
+            char line[] = "Dice: ----\r\n";
+
+            for (int i = 0; i < 4; i++) {
+                if (in & (1 << i)) {           /* SWi on -> roll digit i */
+                    u32 dice = random_next() % 6 + 1;
+                    val &= ~(0xF << (4 * i));
+                    val |= dice << (4 * i);
+                    line[9 - i] = '0' + dice;
+                }
+            }
+
+            Xil_Out32(SEG7_VAL, val);          /* dice result on display */
+            uart_print(line);                  /* dice result to PC      */
         }
+        btn_old = btn;
     }
 }

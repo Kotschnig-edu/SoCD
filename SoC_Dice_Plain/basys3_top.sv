@@ -60,8 +60,12 @@ module basys3_top(
   logic [7:0] deb_dout;
   logic [7:0] deb_dout_pls;
 
-  // Lab 06: GPIO = switch inputs only, LEDs from the LED controller
+  // Lab 07: hardware version, read by the software via GPIO channel 1.
+  //   !!! Increment on EVERY build !!!   format 0xLLLL_BBBB: LLLL = lab, BBBB = build
+  localparam logic [31:0] HW_VERSION = 32'h0007_0001;
+
   logic [7:0]  sw_deb;        // Debounced switches 7..0
+  logic [4:0]  gpio2_in;      // GPIO channel 2: [4] = BTNU, [3:0] = SW3..SW0
   logic [15:0] ledcntrl_led;  // LED output of the AHB LED controller
             
    
@@ -191,6 +195,9 @@ module basys3_top(
   // Lab 06: all 16 LEDs are driven by the AHB LED controller
   assign led = ledcntrl_led;
 
+  // Lab 07: GPIO channel 2 = debounced BTNU (deb_dout[0]) and SW3..SW0
+  assign gpio2_in = {deb_dout[0], sw_deb[3:0]};
+
 
   soc_top soc_top_i (
         .ahb_0_haddr    (ahb_0_haddr ),
@@ -221,9 +228,8 @@ module basys3_top(
         .apb_1_pwdata (apb_1_pwdata ),
         .apb_1_pwrite (apb_1_pwrite ),
         .clk_100MHz   (clk),
-        .gpio_rtl_0_tri_i ({16'h0000, sw_deb, 8'h00}), // switches on bits [15:8]
-        .gpio_rtl_0_tri_o (),
-        .gpio_rtl_0_tri_t (),
+        .gpio_rtl_0_tri_i  (HW_VERSION), // GPIO channel 1: version (all inputs)
+        .gpio2_rtl_0_tri_i (gpio2_in  ), // GPIO channel 2: BTNU + SW3..SW0 (all inputs)
         .pwm          (pwm),
         .reset_n      (rst_n),
         .uart_rxd     (RsRx),

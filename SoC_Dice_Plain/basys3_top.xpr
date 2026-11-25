@@ -171,28 +171,10 @@
           <Proxy FileSetName="soc_top_proc_sys_reset_0_0"/>
         </CompFileExtendedInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/SoC_Dice_Plain/ahb3lite_pkg.sv">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/x32g55/Downloads/SoC_Dice_Plain/ahb3lite_pkg.sv"/>
-          <Attr Name="ImportTime" Val="1790758567"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/SoC_Dice_Plain/apb_master.sv">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../Users/x32g55/Downloads/SoC_Dice_Plain/apb_master.sv"/>
           <Attr Name="ImportTime" Val="1790758566"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/SoC_Dice_Plain/ahb3lite_bfm.sv">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/x32g55/Downloads/SoC_Dice_Plain/ahb3lite_bfm.sv"/>
-          <Attr Name="ImportTime" Val="1790758568"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -235,6 +217,20 @@
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/SoC_Dice_Plain/ahb3lite_pkg.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/x32g55/Downloads/SoC_Dice_Plain/ahb3lite_pkg.sv"/>
+          <Attr Name="ImportTime" Val="1790758567"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/SoC_Dice_Plain/ahb3lite_bfm.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../Users/x32g55/Downloads/SoC_Dice_Plain/ahb3lite_bfm.sv"/>
+          <Attr Name="ImportTime" Val="1790758568"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
